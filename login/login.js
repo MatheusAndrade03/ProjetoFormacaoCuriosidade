@@ -38,8 +38,12 @@ const matheus = [{
 ];
 
 function onLoad() {
-        localStorage.setItem('luciano', JSON.stringify(luciano));
-        localStorage.setItem('matheus', JSON.stringify(matheus));
+        if (localStorage.getItem('luciano') == null) {
+                localStorage.setItem('luciano', JSON.stringify(luciano));
+        }
+        if (localStorage.getItem('matheus') == null) {
+                localStorage.setItem('matheus', JSON.stringify(matheus));
+        }
 }
 
 
