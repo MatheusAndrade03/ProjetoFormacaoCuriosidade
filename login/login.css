@@ -1,0 +1,207 @@
+@charset "UTF-8";
+
+
+* {
+
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+
+body,
+html {
+
+    background-color: #d9d99b;
+    height: 100vh;
+    width: 100vw;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+
+
+}
+
+section#login {
+
+    background-color: #ffffff;
+    width: 300px;
+    height: 650px;
+    border-radius: 20px;
+
+
+
+}
+
+div#imagem {
+    
+    border-radius: 20px 20px 0px 0px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top center;
+    height: 200px;
+    background-color: #3a2613;
+    border: 1px solid black;
+    box-shadow: 1px 1px 1px black;
+
+}
+
+
+/* Section Formulario  */
+
+#formulario {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+
+}
+
+#formulario div.logo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    background-color: #3a2613;
+    margin-bottom: 20px;
+    padding: 10px;
+
+
+}
+
+/* Logo OC */
+#formulario div.logo>h1 {
+    color: white;
+    font-size: 3em;
+    font-weight: bold;
+
+}
+
+#formulario div.logo>p {
+    color: white;
+    font-size: 0.8em;
+
+}
+
+/* Formulario form */
+#formulario>form {
+    width: 100%;
+}
+
+#formulario>div {
+    padding-top: 10px;
+}
+
+#formulario>form>div {
+    padding-top: 10px;
+}
+
+/* login */
+
+#formulario>form>div.login {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+}
+
+#formulario>form>div.login>span {
+    position: absolute;
+    left: 35px;
+}
+
+#formulario>form>div.senha {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+}
+
+#formulario>form>div.senha>span {
+    position: absolute;
+    left: 35px;
+}
+
+
+#formulario>form>div .inputs {
+    color: #3a2613;
+    width: 80%;
+    height: 40px;
+    outline: none;
+    border: 3px solid #3a2613;
+    padding-left: 45px;
+    font-size: 16px;
+    border-radius: 8px;
+
+
+}
+
+div.campo>label {
+    display: none;
+}
+
+
+#botoes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    height: 100%;
+}
+
+#botaoEntrar {
+
+    padding-top: 10px;
+    font-size: 1em;
+    width: 100%;
+    height: 40px;
+    background-color: #3a2613;
+    border: 1px solid black;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+
+}
+
+#botaoEntrar:hover {
+    background-color: #3a2613;
+
+}
+
+#botaoEsqueciSenha {
+    padding-top: 10px;
+    width: 100%;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 30px;
+
+    text-decoration: none;
+
+    color: #5f3a36;
+
+
+}
+
+#botaoEsqueciSenha:hover {
+    background-color: #5f3a36;
+    color: white;
+}

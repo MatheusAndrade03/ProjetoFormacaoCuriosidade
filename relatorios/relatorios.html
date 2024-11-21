@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios</title>
+    <!-- estilos -->
+    <link rel="stylesheet" href="relatorios.css">
+    <link rel="stylesheet" href="/estilos/responsivo.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=logout" />
+</head>
+
+<body onload="onLoad()">
+    <div onclick="fecharMenu()" class="overflow">
+        
+    </div><!-- overflow -->
+    
+    <nav class="nav">
+        <div class="menu-close">
+            <img onclick="fecharMenu()" id="fechar-menu" src="/imagens/excluir.png" alt="close">
+        </div> <!-- menu-close -->
+        
+       
+        <div class="logo flex">
+
+            <h1>OC</h1>
+            <p>Operação Curiosidade</p>
+
+        </div> <!-- logo -->
+
+        <menu class="menu-wrapper">
+
+            <ul class="menu-wrap">
+                <li class="li-borda li-home"><img src="/imagens/home 1.png" alt="icon-home"><a href="/home/home.html">Home</a></li>
+                <li class="li-borda li-cadastro"><img src="/imagens/account-multiple-plus 1.png" alt="icon-cadastro"><a href="/cadastro/cadastro.html">Cadastro</a></li>
+                <li class="li-relatorios"><img src="/imagens/chart-box 1.png" alt="icon-relatorios"><a href="#">Relatórios</a></li>
+            </ul> <!-- menu-wrap -->
+
+        </menu> <!-- menu-wapper -->
+
+
+
+
+
+    </nav>
+    <main>
+            <section class="pesquisar-wrapper">
+                <div class="pesquisar-wrap" >
+                    <span class="material-symbols-outlined">
+                        search
+                        </span>
+                    <input type="text" placeholder="Pesquisar..." class="pesquisar">
+                </div><!-- pesquisar-wrap -->
+                <div class="abrirMenu-wraper">
+                    <img id="abrir-menu" src="/imagens/menu-icon.png" alt="menu" onclick="abrirMenu()">
+ 
+                 </div>
+                
+                <div class="flex-usuario">
+                    
+                    <div class="usuario-wrap">
+                        <div class="flex">
+                            <img src="https://i.pinimg.com/236x/f5/dd/c6/f5ddc690ab0783246299f9045bb2dec4.jpg" alt="foto-do-perfil">
+                            <p id="usuario-logado"></p>
+                        </div>
+                    </div><!-- usuario-wrap -->
+                    
+                    <div class="botao-sair">
+                        <span class="material-symbols-outlined">
+                            logout
+                            </span>
+                        <button class="btn-sair">Sair</button>
+                    </div><!-- botao-sair -->
+
+                </div>  <!-- flex-usuario -->
+
+            </section><!-- pesquisar-wrapper -->
+                
+               
+            <section class="lista-wrapper">
+
+                <h1>Relatórios</h1>
+
+                <ul clas="lista-wrap" >
+                    <li><p>NOME</p></li>
+                    <li class="btn-listaUsuarios" ><p><a href="../relatorio-listaUsuario/relatorio-listaUsuario.html">Lista de usuário</a></p></li>
+                </ul>
+
+
+            </section>  <!-- lista-wrapper -->
+          
+
+
+
+    </main>
+
+
+
+
+
+
+
+    <script src="relatorios.js"></script>
+</body>
+
+</html>

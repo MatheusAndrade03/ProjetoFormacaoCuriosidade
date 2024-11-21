@@ -1,0 +1,31 @@
+@charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    display: none;
+}
+.usuario-wrap{
+    display: none;
+}
+.pesquisar-wrapper{
+    display: none;
+}
+.botao-sair{
+    display: none;
+}
+.pesquisar-wrap{
+    display: none;
+}
+.botao-imprimir{
+    display: none;
+}
+.lista-wrapper{
+    box-shadow: none;
+    border: none;
+    width: 100vw;
+    height: 100vh;
+
+}

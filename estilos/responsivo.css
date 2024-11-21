@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+
+/* Tablete */
+@media screen and (max-width: 1020px) {
+/* geral css */
+    main{
+    background-color: #d9d99b;
+    width: 70%;
+    }
+    nav{
+        width: 30%;
+    }
+    /* Parte Superior do site */
+    /* Usuario */
+
+    /* barra de pesquisa */
+   
+    
+    section.pesquisar-wrapper>.pesquisar-wrap>.pesquisar{
+        width: 280px;
+    
+    }
+    
+    /* usuario  */
+    section.pesquisar-wrapper>.usuario-wrap{
+        transform:none;
+    
+    }
+   
+    section.pesquisar-wrapper>.usuario-wrap img{ 
+        width: 38px;
+        height: 38px;
+    }
+    /* botao sair */
+   
+    
+    section.pesquisar-wrapper>.botao-sair>.btn-sair{
+            width: 40px;
+    }
+    
+    
+}
+/* celular */
+@media screen and (max-width:830px) {
+    body{
+        position: relative;
+        flex-direction: row;
+    }
+   
+    main{
+        background-color: #d9d99b;
+        width: 100%;
+        padding-bottom: 10px;
+    }
+    nav{
+        position: absolute;
+        top: 0;
+        left: -400px;
+    
+        z-index: 3;
+        position: absolute;
+        width: 45%;
+        transition: all 0.5s ease;
+
+        
+    }	
+    .overflow{
+        position: absolute;
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        z-index: 2;
+        background-color: rgba(0, 0, 0, 0.988);
+        opacity: 0.7;
+    }
+
+
+
+    /* pesquisar */
+
+        section.pesquisar-wrapper{
+            padding: 10px;
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        section.pesquisar-wrapper>.pesquisar-wrap{
+            width: 100%;
+        }
+    section.pesquisar-wrapper>.pesquisar-wrap>.pesquisar{
+        width: 100%;
+        
+    }
+    /* icon menu */
+    #abrir-menu{
+        display: block;
+        position: absolute;
+        top: 15px;
+        left: 13px;
+        cursor: pointer;
+    }
+    /* fechar menu */
+    nav #fechar-menu{
+        display: block;
+        position: absolute;
+        top: 15px;
+        right: 13px;
+        cursor: pointer;
+        width: 25px;
+        
+    
+    } 
+    .dashboard-wrapper .dashboard-wrap>p{
+        font-size: 15px;
+    }
+
+    
+    /* usuario  */
+    section.pesquisar-wrapper>.flex-usuario{
+        display: flex;
+    
+    }   
+
+    .botao-imprimir>.btn-imprimir{
+        width: 120px;
+    }
+
+
+
+  
+}

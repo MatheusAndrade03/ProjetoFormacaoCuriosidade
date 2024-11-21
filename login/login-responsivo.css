@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+
+
+@media screen and (min-width: 768px)and (max-width:992px){
+    body{
+    background-image: linear-gradient(   to top,#d9d99b , #d9d99b);
+    }
+    section#login{
+        display: flex;
+        flex-direction: row;
+
+
+        width: 80vw;
+    }
+    section#login >div#imagem{
+        float: left;
+        width: 50%;
+        height: 100%;
+        background-position: left left;
+        border-radius: 15px 0px 0px 15px;
+        background-size: cover;
+       background-repeat: no-repeat;
+    }
+    section#login >div#formulario{
+        float: right;
+        display: flex;
+
+
+        width:50% ;
+        flex-direction: column;
+        align-items: center;
+        
+    }
+    #formulario> div{
+        padding-top: 40px;
+    }
+    #formulario>form{
+       padding-top: 20px;
+    }
+    #formulario>form>div{
+        padding-top: 20px;
+    }
+
+}
+@media screen and (min-width: 990px){
+     body{
+    background-image: linear-gradient(   to top,#d9d99b,#d9d99b ); 
+    }
+
+    section#login{
+       
+        width: 990px;
+    }
+    section#login >div#imagem{
+        
+        float: right;
+        width: 40%;
+        height: 100%;
+        background-position: left left;
+        border-radius: 0px 15px 15px 0px;
+        background-size: cover;
+       background-repeat: no-repeat;
+    }
+    section#login >div#formulario{
+       
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+        align-items: center;
+        float: left;
+        width: 60%;
+        
+    }
+    #formulario> div{
+        padding-top: 40px;
+    }
+    #formulario>form{
+       padding-top: 20px;
+    }
+    #formulario>form>div{
+        padding-top: 20px;
+    }
+    #formulario>form>div .inputs{
+        color: #3a2613;
+        width: 90%;
+        height: 40px;
+        outline: none;
+        font-size: 20px;
+        
+    
+    }
+    #botaoEntrar{
+    
+        padding-top: 10px;
+        font-size: 1em;
+        width: 50%;
+        height: 40px;
+        background-color: #3a2613;
+        border: 1px solid black;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+    
+    }
+    #botaoEntrar:hover{
+        background-color: #5d3918;
+    
+    }
+
+}
