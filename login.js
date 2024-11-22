@@ -49,7 +49,7 @@ function onLoad() {
 
 // botão entrar ação
 btnEntrar.addEventListener("click", (event) => {
-      
+      event.preventDefault();
         entrar(event)
 
 })
@@ -64,14 +64,14 @@ function entrar(event) {
                         window.location.href = 'home/home.html';
                 }else{
                         window.alert('Email ou senha incorretos.');
-                        event.preventDefault(); // impede o envio do formulário
+                         // impede o envio do formulário
                 }
 
 
 
         } else {
                 window.alert('Erro ao entrar no sistema.');
-                event.preventDefault(); // impede o envio do formulário
+                // impede o envio do formulário
         }
 }
 
@@ -107,7 +107,7 @@ function validarLoginESenha() {
         for (let i = 0; i < localStorage.length; i++) {
                 let usuarios = JSON.parse(localStorage.getItem(localStorage.key(i))); // Obtém o objeto do usuário armazenado no localStorage
                 let usuario=usuarios[0];
-                console.log(usuario);
+               
                 if (usuario.email == emailValor && usuario.senha == senhaValor) {
                         console.log('Login bem-sucedido!');
                         localStorage.setItem('usuarioLogado', JSON.stringify(usuario.usuario));
