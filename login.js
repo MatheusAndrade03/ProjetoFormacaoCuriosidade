@@ -56,7 +56,7 @@ btnEntrar.addEventListener("click", (event) => {
 
 // entrar no sistema
 function entrar(event) {
-     event.preventDefault();
+   
         if (validarCampos() == true) {
                 
                 if (validarLoginESenha() == true) {
