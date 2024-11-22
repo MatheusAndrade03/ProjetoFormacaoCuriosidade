@@ -108,6 +108,11 @@ nav .menu-wrap>.li-home>img{
     background-color: #fff;
     border-radius: 20px;
 }
+nav .menu-wrap>li>img{
+   width: 24px;
+   height: 24px;
+    border-radius: 20px;
+}
 nav .menu-wrap>li>a{
     text-decoration: none;
     color:  #4f3011;

@@ -9,11 +9,11 @@
     padding: 0;
     box-sizing: border-box;
 }
-body::-webkit-scrollbar{
-    
+
+body::-webkit-scrollbar { 
     display: none;
-  
-}
+  }
+
 body {
     display: flex;
     flex-direction: row;
@@ -28,6 +28,7 @@ main{
     flex-direction: column;
     background-color: #d9d99b;
     width: 77%;
+    height: 100%;
     
 }
 .overflow{
@@ -92,17 +93,17 @@ nav .menu-wrap>li{
 nav .menu-wrap>.li-borda{
     box-shadow: 0px 1px 0px #3a2613;
 }
-nav .menu-wrap>.li-relatorios{
+nav .menu-wrap>.li-admin{
     background-color: #3a2613;
     box-shadow: 1px 1px 5px black;
 }
-nav .menu-wrap>.li-relatorios>a{
+nav .menu-wrap>.li-admin>a{
     color: #fff;
 }
-nav .menu-wrap>.li-relatorios>a:hover{
+nav .menu-wrap>.li-admin>a:hover{
     color: #f9f9f9;
 }
-nav .menu-wrap>.li-relatorios>img{
+nav .menu-wrap>.li-admin>img{
     background-color: #fff;
     border-radius: 25px;
 }
@@ -163,6 +164,7 @@ section.pesquisar-wrapper>.pesquisar-wrap>.pesquisar{
     padding-left: 45px;
 
 }
+/* Abrir menu */
 #abrir-menu{
     display: none;
 }
@@ -230,6 +232,7 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
 
 /* Lista */
 .lista-wrapper{
+    display: block;
     position: relative;
     margin: 25px 2%;
     background-color: #fff;
@@ -243,9 +246,8 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
     font-size: 18px;
     font-weight: 700;
     line-height: 21.13px;
-    margin-bottom: 20px;
+    margin-bottom: 45px;
 }
-
 .lista-wrapper>.titulo-lista{
     width: 100%;
     display: flex;
@@ -272,6 +274,7 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
     padding: 0 20px;
 }
 .lista-wrapper>ul>li{
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -282,35 +285,242 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
     background-color: #3a2613;
     color: #fff;
 }
-
-
 .lista-wrapper>ul>li>p{
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 16.41px;
 }
-/* botao imprimir */
-.botao-imprimir>.btn-imprimir{
+#btn-editar{
+    position: absolute;
+    right: 60px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #056ac9;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+}
+#btn-editar>img{
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border-radius: 50px;
+
+}
+#btn-excluir{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e60303;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+
+.botao-cadastrar>.btn-cadastrar{
     position: absolute;
     top: 10px;
     right: 20px;
-    width: 234px;
+    background-color: #218b0c;
+    width: 224px;
     height: 39px;
-    background-color: #5763A0;
-    color: #fff;
+    box-shadow: 1px 1px 5px black;
+    border-radius: 3px;
     border: none;
+    color: #fff;
+    padding: 10px 20px;
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     line-height: 18.75px;
-    font-weight: 800;
-    box-shadow: 1px 1px 5px black;
     cursor: pointer;
-    transition:all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
 }
-.botao-imprimir>.btn-imprimir:hover{
-    background-color: #5f6db4;
+.botao-cadastrar>.btn-cadastrar:hover{
+    background-color: #1a6e0a;
     transform: scale(1.1);
-    box-shadow: 0px 0px 10px #5763A0;
+    box-shadow: 0px 0px 10px #218b0c;
+}
+
+/* Formulario */
+
+
+section.cadastro-wrapper{
+    display: none;
+   position: relative;
+    margin: 25px 2%;
+    background-color: #fff;
+    height:80%;
+    box-shadow: 1px 1px 5px black;
+    padding: 20px;
+}
+section.cadastro-wrapper>h1{
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 21.13px;
+    margin-bottom: 20px;
+}
+section.cadastro-wrapper> .radio{
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    top: 20px;
+    right: 50px;
+}
+
+
+section.cadastro-wrapper>form{
+    overflow:  auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    height: 95%;
+}
+section.cadastro-wrapper>form>h2{
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 21.09px;
+}
+/* Cadastro  email,nome,endereço*/
+.cadastro-wrap{
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #4f3011;
+  
+}
+
+.cadastro-usuario{
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.cadastro-usuario>label{
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18.75px;
+}
+.cadastro-usuario>input{
+    width: 100%;
+    height: 36px;
+    border: none;
+    border-radius: 2px;
+    padding: 0 10px;
+    font-family: "Roboto", sans-serif;
+    outline: none;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18.75px;
+    margin-bottom: 10px;
+    background-color: #f5f5dc;
+    box-shadow: 1px 1px 5px black;
+}
+
+.cadastro-senha{
+    display: flex;
+    width: 100%;
+   
+    flex-direction: column;
+    margin-right: 30px;
+}
+.cadastro-senha>label{
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18.75px;
+}
+.cadastro-senha>input{
+    width: 100%;
+    height: 36px;
+    border: none;
+    border-radius: 2px;
+    padding: 0 10px;
+    font-family: "Roboto", sans-serif;
+    outline: none;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18.75px;
+    margin-bottom: 10px;
+    background-color: #f5f5dc;
+    box-shadow: 1px 1px 5px black;
+}
+
+.cadastro-email{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.cadastro-email>label{
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18.75px;
+}
+.cadastro-email>input{
+    width: 100%;
+    height: 36px;
+    border: none;
+    border-radius: 2px;
+    padding: 0 10px;
+    font-family: "Roboto", sans-serif;
+    outline: none;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 18.75px;
+    margin-bottom: 10px;
+    background-color: #f5f5dc;
+    box-shadow: 1px 1px 5px black;
+}
+
+
+/* Botão gravar */
+.botao-salvar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.botao-salvar>.btn-salvar{
+    background-color: #218b0c;
+    width: 234px;
+    height: 39px;
+    box-shadow: 1px 1px 5px black;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;                    
+    font-size: 16px;
+    line-height: 18.75px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Cadastro-wrapper-editar */
+#cadastro-wrapper-editar{
+    display: none;
+    position: relative;
+    margin: 25px 2%;
+    background-color: #fff;
+    height:80%;
+    box-shadow: 1px 1px 5px black;
+    padding: 20px;
 }

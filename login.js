@@ -6,6 +6,7 @@ const luciano = [{
         usuario: "luciano",
         senha: 'admin',
         email: "admin@gmail.com",
+        admin: true,
 
         colaboradores: [
                 {
@@ -23,6 +24,7 @@ const matheus = [{
         usuario: "matheus",
         senha: 'matheus123',
         email: "matheus@gmail.com",
+        admin: false,
 
         colaboradores: [
                 {
