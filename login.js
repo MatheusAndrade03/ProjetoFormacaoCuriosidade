@@ -61,7 +61,7 @@ function entrar(event) {
                 
                 if (validarLoginESenha() == true) {
                         window.alert('Login bem-sucedido!')
-                        window.location.href = '../home/home.html';
+                        window.location.href = 'home/home.html';
                 }else{
                         window.alert('Email ou senha incorretos.');
                         event.preventDefault(); // impede o envio do formulário
