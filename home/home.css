@@ -313,6 +313,7 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
 }
 .lista-wrapper>.titulo-lista>p{
     font-family: "Roboto", sans-serif;
+    
     font-size: 16px;
     font-weight: 400;
     line-height: 16.41px;
@@ -331,11 +332,17 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
     border-bottom: 1px solid #4f3011;
     
 }
+.lista-wrapper>ul>li>.pAtivo{
+    display: flex;
+    justify-content: flex-end;
+}
 .lista-wrapper>ul>li>p{
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 16.41px;
+    width: 200px;
+    flex-wrap: wrap;
 }
 .lista-wrapper>ul>li:hover{
     background-color: #3a2613;

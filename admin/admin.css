@@ -264,6 +264,12 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
     border-bottom: 1px solid #4f3011;
 
 }
+.lista-wrapper>.titulo-lista>.borda>.e-mai{
+    margin-left: 60px;
+}
+.lista-wrapper>.titulo-lista>.borda>.manipulavel{
+    color: transparent;
+}
 
 .lista-wrapper>.titulo-lista>p{
     font-family: "Roboto", sans-serif;
@@ -280,6 +286,7 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
     display: flex;
     align-items: center;
     justify-content: space-between;
+  
     padding: 20px;
     border-bottom: 1px solid #4f3011;
 }

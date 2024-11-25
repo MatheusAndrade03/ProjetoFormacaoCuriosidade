@@ -266,6 +266,7 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
     font-size: 16px;
     font-weight: 400;
     line-height: 16.41px;
+    
 }
 .lista-wrapper>ul{
     list-style: none;
@@ -283,12 +284,17 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
     color: #fff;
 }
 
-
+.lista-wrapper>ul>li>.pAtivo{
+    display: flex;
+    justify-content: flex-end;
+}
 .lista-wrapper>ul>li>p{
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: 16.41px;
+    width: 200px;
+    flex-wrap: wrap;
 }
 /* botao imprimir */
 .botao-imprimir>.btn-imprimir{
