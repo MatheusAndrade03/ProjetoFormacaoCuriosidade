@@ -8,10 +8,16 @@ const formUsuario= document.querySelector('#usuario');
 const formSenha = document.querySelector('#senha');
 const formEmail= document.querySelector('#email');
 const radioAdmin= document.querySelector('#ativo');
+// compos formulario editar
+const btnconfirmarEdit = document.querySelector("#btn-salvar-editar");
+const formUsuarioEdit= document.querySelector('#iusuario');
+const formSenhaEdit = document.querySelector('#isenha');
+const formEmailEdit= document.querySelector('#iemail');
+const radioAdminEdit= document.querySelector('#iativo');
 
 // Botão que aciona cadastrar usuario
 btnSalvar.addEventListener("click", (event) => {
-    debugger
+   
     cadastrarUsuario(event);
 
 })
@@ -125,14 +131,15 @@ function adicionarNaLista(usuario) {
     btnExcluir.innerHTML = `X`;
     btnExcluir.setAttribute("id", "btn-excluir");
     btnExcluir.addEventListener("click", () => {
-        excluirColaborador(colaborador);
+        excluirUsuario(usuario);
         item.remove();
     });
     const btnEditar = item.querySelector("#btn-editar");
     btnEditar.addEventListener("click", () => {
-        abrirModal(colaborador);
+        abrirModal(usuario);
         btnconfirmarEdit.addEventListener("click",()=>{
-            editarColaborador(colaborador);
+            debugger;
+            editarUsuario(usuario);
         
         })
     });
@@ -148,9 +155,13 @@ function carregarLista() {
    for( let i = 0; i < localStorage.length; i++) {
          let key = localStorage.key(i);
          let usuario = JSON.parse(localStorage.getItem(key));
-         if(usuario[0].usuario !== undefined) {
+         if(usuario[0].usuario !== undefined  ) {
+            if(usuario[0].admin == false) {
 
-         adicionarNaLista(usuario[0]);
+                adicionarNaLista(usuario[0]);
+            }
+
+         
          }
 
    }
@@ -179,3 +190,62 @@ pesquisar.addEventListener("keyup", () => {
 
 
 }});
+
+
+
+
+// excluir colaborador
+function excluirUsuario(usuario) {
+
+    localStorage.removeItem(usuario.usuario);
+}
+
+
+
+
+// função para abrir modal  para editar usuario
+function abrirModal(usuario) {
+    const modal = document.querySelector("#cadastro-wrapper-editar");
+    const telaLista = document.querySelector(".lista-wrapper");
+   
+   formUsuarioEdit.value = usuario.usuario;
+    formSenhaEdit.value = usuario.senha;
+   formEmailEdit.value = usuario.email;
+    radioAdminEdit.checked = usuario.admin
+
+
+    
+
+
+    telaLista.style.display = "none";
+    modal.style.display = "block";
+
+}
+
+
+
+
+
+
+
+// função para editar um usuario
+function editarUsuario(user){
+    let usuario = formUsuarioEdit.value;
+    let senha = formSenhaEdit.value;
+    let email = formEmailEdit.value;
+    let admin = radioAdminEdit.checked ? true : false;
+    
+   
+    const usuarios  = JSON.parse(localStorage.getItem(user.usuario));
+    usuarios[0].usuario = usuario;
+    usuarios[0].senha = senha;
+    usuarios[0].email = email;
+    usuarios[0].admin = admin;
+    excluirUsuario(user);
+    localStorage.setItem(usuario, JSON.stringify(usuarios));
+    adicionarNaLista(usuarios[0]);
+    alert("Usuario editado com sucesso!");
+
+
+
+}

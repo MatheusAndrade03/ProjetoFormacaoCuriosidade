@@ -254,7 +254,8 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
     padding: 0 20px;
     justify-content: space-between;
    
-}.lista-wrapper>.titulo-lista>.borda{
+}
+.lista-wrapper>.titulo-lista>.borda{
    width: 100%;
     display: flex;
     align-items: center;
@@ -263,6 +264,7 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
     border-bottom: 1px solid #4f3011;
 
 }
+
 .lista-wrapper>.titulo-lista>p{
     font-family: "Roboto", sans-serif;
     font-size: 16px;

@@ -100,3 +100,17 @@ pesquisar.addEventListener("keyup", ()=>{
 
     
 });
+
+
+
+//Admin - Cadastro de usuarios
+
+function abrirTelaAdmin(){
+    let usuario = usuarioLogado.innerHTML;
+    const usuarioAdmin = JSON.parse(localStorage.getItem(usuario));
+    if(usuarioAdmin[0].admin == true){
+    window.location.href = "../admin/admin.html";
+    }else{
+        alert("Acesso negado!");
+    }
+}
