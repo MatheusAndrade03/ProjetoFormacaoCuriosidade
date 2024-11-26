@@ -15,6 +15,7 @@ const formSenhaEdit = document.querySelector('#isenha');
 const formEmailEdit= document.querySelector('#iemail');
 const radioAdminEdit= document.querySelector('#iativo');
 
+
 // Botão que aciona cadastrar usuario
 btnSalvar.addEventListener("click", (event) => {
    
@@ -71,7 +72,7 @@ function abrirCadastro() {
 
 }
 
-
+// cadastrar usuario
 function cadastrarUsuario(event) {
     let usuario = formUsuario.value;
     let senha = formSenha.value;

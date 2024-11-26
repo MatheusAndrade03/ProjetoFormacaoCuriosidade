@@ -54,6 +54,7 @@ const matheus = [{
 }
 ];
 
+// ao carregar a pagina
 function onLoad() {
         if (localStorage.getItem('luciano') == null) {
                 localStorage.setItem('luciano', JSON.stringify(luciano));
