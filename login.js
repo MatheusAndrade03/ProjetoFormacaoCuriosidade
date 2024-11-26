@@ -10,9 +10,16 @@ const luciano = [{
 
         colaboradores: [
                 {
-                        nome: "Luciano",
-                        email: "luciano@gmail.com",
-                        ativo: true
+                        ativo: false,
+                        email: "lucian@hotmail.com",
+                        endereco: "Kanematsu Matsubara",
+                        id: "_cvl98qfhl",
+                        idade: "23",
+                        interesses: "",
+                        nome: "Lucian",
+                        outrasInfo: "",
+                        sentimentos: "",
+                        valores: ""
 
 
                 }
@@ -28,9 +35,17 @@ const matheus = [{
 
         colaboradores: [
                 {
-                        nome: "matheus",
-                        email: "matheus@gmail.com",
-                        ativo: true
+                        ativo: false,
+                        email: "marcos@hotmail.com",
+                        endereco: "Kanematsu Matsubara",
+                        id: "_cvl98qfhm",
+                        idade: "22",
+                        interesses: "",
+                        nome: "Marcos",
+                        outrasInfo: "",
+                        sentimentos: "",
+                        valores: ""
+
 
 
                 }

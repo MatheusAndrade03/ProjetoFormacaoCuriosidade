@@ -182,10 +182,12 @@ pesquisar.addEventListener("keyup", () => {
         let key = localStorage.key(i)
         let usuario = JSON.parse(localStorage.getItem(key))
         if(usuario[0].usuario !== undefined) {
-        if(usuario[0].usuario.toLowerCase().includes(valor) || usuario[0].email.toLowerCase().includes(valor))
+        if(usuario[0].admin == false){
+        if(usuario[0].usuario.toLowerCase().includes(valor) || usuario[0].email.toLowerCase().includes(valor)){
         adicionarNaLista(usuario[0])
+         }
 
-
+        }
     }
 
 
