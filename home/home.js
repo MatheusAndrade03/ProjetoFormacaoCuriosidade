@@ -53,7 +53,7 @@ btnSair.addEventListener("click", function(){
 function adicionarNaLista(colaborador) {
     const lista = document.querySelector("#listaCadastros");
     const item = document.createElement('li');
-    item.innerHTML = `<p>${colaborador.nome}</p> <p>${colaborador.email}</p> <p class="pAtivo">${colaborador.ativo?"ativo":"inativo"}</p>`;
+    item.innerHTML = `<p><abbr title="${colaborador.nome}">${colaborador.nome}</abbr></p>  <p><abbr title="${colaborador.email}">${colaborador.email}</abbr></p> <p class="pAtivo">${colaborador.ativo?"ativo":"inativo"}</p>`;
   
     lista.appendChild(item);
 

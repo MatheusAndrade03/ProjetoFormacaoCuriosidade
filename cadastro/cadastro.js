@@ -178,7 +178,7 @@ function gerarId() {
 function adicionarNaLista(colaborador) {
     const lista = document.querySelector("#listaCadastros");
     const item = document.createElement('li');
-    item.innerHTML = `<p>${colaborador.nome}</p> <p>${colaborador.email}</p> <button id="btn-editar"><img src="../imagens/edit.png" alt="edit"></button>`;
+    item.innerHTML = `<p><abbr title="${colaborador.nome}">${colaborador.nome}</abbr></p> <p><abbr title="${colaborador.email}">${colaborador.email}</abbr></p> <button id="btn-editar"><img src="../imagens/edit.png" alt="edit"></button>`;
     const btnExcluir = document.createElement("button");
     btnExcluir.innerHTML = `X`;
     btnExcluir.setAttribute("id", "btn-excluir");

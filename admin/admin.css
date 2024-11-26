@@ -299,6 +299,13 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
     font-size: 16px;
     font-weight: 400;
     line-height: 16.41px;
+    width: 200px;
+    white-space: nowrap;                  
+    overflow: hidden; /* "overflow" value must be different from "visible" */
+    text-overflow:    ellipsis;
+}
+.lista-wrapper>ul>li>p>abbr{
+    text-decoration: none;
 }
 #btn-editar{
     position: absolute;

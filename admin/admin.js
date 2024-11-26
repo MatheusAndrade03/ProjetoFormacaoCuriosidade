@@ -126,7 +126,7 @@ function cadastrarUsuario(event) {
 function adicionarNaLista(usuario) {
     const lista = document.querySelector("#listaCadastros");
     const item = document.createElement('li');
-    item.innerHTML = `<p>${usuario.usuario}</p> <p>${usuario.email}</p> <button id="btn-editar"><img src="../imagens/edit.png" alt="edit"></button>`;
+    item.innerHTML = `<p>${usuario.usuario}</p> <p><abbr title="${usuario.email}">${usuario.email}</abbr></p> <button id="btn-editar"><img src="../imagens/edit.png" alt="edit"></button>`;
     const btnExcluir = document.createElement("button");
     btnExcluir.innerHTML = `X`;
     btnExcluir.setAttribute("id", "btn-excluir");

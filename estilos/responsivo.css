@@ -38,6 +38,17 @@
     section.pesquisar-wrapper>.botao-sair>.btn-sair{
             width: 40px;
     }
+    /* lista */
+
+    .lista-wrapper>ul>li>p{
+      
+        width: 100px;
+       
+    }
+    .lista-wrapper>.titulo-lista>.borda> .e-ma{
+        margin-left: 120px;
+        
+    }
     
     
 }
@@ -128,6 +139,11 @@
     }
 
 
+    .lista-wrapper>ul>li>p{
+      
+        width: 100px;
+       
+    }
 
   
 }
