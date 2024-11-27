@@ -14,6 +14,7 @@ body::-webkit-scrollbar{
     display: none;
   
 }
+
 body {
     display: flex;
     flex-direction: row;
@@ -287,6 +288,9 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
 .lista-wrapper>ul>li>.pAtivo{
     display: flex;
     justify-content: flex-end;
+}
+.lista-wrapper>ul>li>.inativo{
+    color: red;
 }
 .lista-wrapper>ul>li>p{
     font-family: "Roboto", sans-serif;

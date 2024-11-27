@@ -332,6 +332,9 @@ section.pesquisar-wrapper>.flex-usuario>.botao-sair>.btn-sair:hover{
     border-bottom: 1px solid #4f3011;
     
 }
+.lista-wrapper>ul>li>.inativo{
+    color: #f90808;
+}
 .lista-wrapper>ul>li>.pAtivo{
     display: flex;
     justify-content: flex-end;
