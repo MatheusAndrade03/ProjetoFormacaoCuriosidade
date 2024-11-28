@@ -127,7 +127,7 @@ function validarLoginESenha() {
                 let usuario=usuarios[0];
                
                 if (usuario.email == emailValor && usuario.senha == senhaValor) {
-                        console.log('Login bem-sucedido!');
+                        
                         localStorage.setItem('usuarioLogado', JSON.stringify(usuario.usuario));
                         return true;
                 }

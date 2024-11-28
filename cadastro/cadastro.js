@@ -25,13 +25,20 @@ const formInteressesEdit = document.querySelector('#iinteresses-area');
 const formSentimentosEdit = document.querySelector('#isentimentos-area');
 const formValoresEdit = document.querySelector('#ivalores-area');
 
+
+
+// carrega ao iniciar a tela
+function onLoad() {
+    carregarUsuarioLogado();
+    carregarLista()
+}
+
 // Botão que aciona cadastrar
 btnSalvar.addEventListener("click", (event) => {
     
     cadastrarColaborador(event);
 
 })
-
 
 // abrir menu
 function abrirMenu(){
@@ -53,11 +60,6 @@ function fecharMenu(){
 
 
 
-// carrega ao iniciar a tela
-function onLoad() {
-    carregarUsuarioLogado();
-    carregarLista()
-}
 
 // carregar o usuario logado
 function carregarUsuarioLogado() {
