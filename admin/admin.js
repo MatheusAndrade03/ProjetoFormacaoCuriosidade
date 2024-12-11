@@ -60,7 +60,7 @@ function carregarUsuarioLogado() {
 
 // sair do sistema
 btnSair.addEventListener("click", function () {
-    window.location.href = "../index.html";
+    window.location.replace ( "../index.html");
 });
 
 // função para abrir a tela de cadastro

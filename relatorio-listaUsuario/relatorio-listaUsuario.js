@@ -49,7 +49,7 @@ function carregarUsuarioLogado(){
 
 // Função para sair da página e voltar a tela de login
 btnSair.addEventListener("click", function(){
-    window.location.href = "../index.html";
+    window.location.replace ( "../index.html");
 });
 // Função para imprimir a página atual
 btnImprimir.addEventListener("click", function(){

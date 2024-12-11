@@ -43,7 +43,8 @@ const btnSair = document.querySelector(".btn-sair");
 
 
 btnSair.addEventListener("click", function(){
-    window.location.href = "../index.html";
+    window.location.replace ( "../index.html");
+
 });
 
 
