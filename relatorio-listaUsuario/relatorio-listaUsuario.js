@@ -3,7 +3,7 @@ const btnSair = document.querySelector(".btn-sair");
 const btnImprimir = document.querySelector(".btn-imprimir");
 const usuarioLogado = document.querySelector("#usuario-logado");
 const pesquisar = document.querySelector("#pesquisarId");
-
+const API_URL = "https://localhost:7222/api";
 
 
 
@@ -70,37 +70,52 @@ function adicionarNaLista(colaborador) {
 
 
 // carregar a lista de colaboradores
-function carregarLista() {
-        let usuario = usuarioLogado.innerHTML;
-    let cadastros= JSON.parse(localStorage.getItem(usuario)) || [];
+async function carregarLista() {
+    const usuarioId= JSON.parse(localStorage.getItem("UsuarioId"));
+    try {
+        const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
 
-    cadastros[0].colaboradores.forEach(item=> adicionarNaLista(item));
+        if (!response.ok) {
+            throw new Error("Erro ao carregar lista de colaboradores");
+        }
 
+        const usuario = await response.json();
+        const colaboradores = usuario.colaboradores;
+        
+        const lista = document.querySelector("#listaCadastros");
+        lista.innerHTML = "";
 
-
-
-
+        colaboradores.forEach((colaborador) => adicionarNaLista(colaborador));
+    } catch (error) {
+        console.error("Erro ao carregar lista:", error);
+    }
 }
 
 // pesquisar colaborador
 
-pesquisar.addEventListener("keyup", ()=>{
+pesquisar.addEventListener("keyup", async () => {
+    let valor = pesquisar.value.toLowerCase();
+    const usuarioId= JSON.parse(localStorage.getItem("UsuarioId"));
 
-    
-    let usuario = usuarioLogado.innerHTML;
-    let cadastros= JSON.parse(localStorage.getItem(usuario)) || [];
-    let valor = pesquisar.value.toLowerCase(); 
-    const lista = document.querySelector("#listaCadastros")
-    lista.innerHTML = "";
-    cadastros[0].colaboradores.forEach(item=>{
-        if(item.nome.toLowerCase().includes(valor) || item.email.toLowerCase().includes(valor)){
-            adicionarNaLista(item);
+    try {
+        const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
+
+        if (!response.ok) {
+            throw new Error("Erro ao carregar colaboradores para pesquisa");
         }
-    });
 
-    
+        const Usuario = await response.json();
+        const colaboradores = Usuario.colaboradores;
+        const lista = document.querySelector("#listaCadastros");
+        lista.innerHTML = "";
+
+        colaboradores
+            .filter((item) => item.nome.toLowerCase().includes(valor) || item.email.toLowerCase().includes(valor))
+            .forEach((item) => adicionarNaLista(item));
+    } catch (error) {
+        console.error("Erro na pesquisa:", error);
+    }
 });
-
 
 
 //Admin - Cadastro de usuarios

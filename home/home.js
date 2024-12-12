@@ -1,10 +1,10 @@
 const usuarioLogado = document.querySelector("#usuario-logado");
-const pesquisar =document.querySelector("#pesquisarId");
-
+const pesquisar = document.querySelector("#pesquisarId");
+const API_URL = "https://localhost:7222/api";
 // abrir menu
-function abrirMenu(){
+function abrirMenu() {
     let nav = document.querySelector(".nav");
-    let overflow= document.querySelector(  ".overflow");
+    let overflow = document.querySelector(".overflow");
     nav.style.display = "block";
     nav.style.left = "0";
     overflow.style.display = "block";
@@ -12,16 +12,16 @@ function abrirMenu(){
 }
 
 // fehar menu
-function fecharMenu(){
+function fecharMenu() {
     let nav = document.querySelector(".nav");
-    let overflow= document.querySelector(  ".overflow");
+    let overflow = document.querySelector(".overflow");
     nav.style.left = "-400px";
     overflow.style.display = "none";
 }
 
 
 // carrega ao iniciar a tela
-function onLoad(){
+function onLoad() {
     carregarUsuarioLogado();
     carregarLista();
     carregarDashborde()
@@ -31,7 +31,7 @@ function onLoad(){
 
 
 // carregar o usuario logado
-function carregarUsuarioLogado(){
+function carregarUsuarioLogado() {
     const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
     usuarioLogado.innerHTML = usuario;
 }
@@ -42,8 +42,8 @@ function carregarUsuarioLogado(){
 const btnSair = document.querySelector(".btn-sair");
 
 
-btnSair.addEventListener("click", function(){
-    window.location.replace ( "../index.html");
+btnSair.addEventListener("click", function () {
+    window.location.replace("../index.html");
 
 });
 
@@ -54,60 +54,92 @@ btnSair.addEventListener("click", function(){
 function adicionarNaLista(colaborador) {
     const lista = document.querySelector("#listaCadastros");
     const item = document.createElement('li');
-    item.innerHTML = `<p><abbr title="${colaborador.nome}">${colaborador.nome}</abbr></p>  <p><abbr title="${colaborador.email}">${colaborador.email}</abbr></p> <p class="pAtivo ${colaborador.ativo?"ativo":"inativo"}">${colaborador.ativo?"ativo":"inativo"}</p>`;
-  
+    item.innerHTML = `<p><abbr title="${colaborador.nome}">${colaborador.nome}</abbr></p>  <p><abbr title="${colaborador.email}">${colaborador.email}</abbr></p> <p class="pAtivo ${colaborador.ativo ? "ativo" : "inativo"}">${colaborador.ativo ? "ativo" : "inativo"}</p>`;
+
     lista.appendChild(item);
 
 }
 
 // carregar a lista de colaboradores
-function carregarLista() {
-    let usuario = usuarioLogado.innerHTML;
-    let cadastros= JSON.parse(localStorage.getItem(usuario)) || [];
-        
-    cadastros[0].colaboradores.reverse().forEach(item=> adicionarNaLista(item));
+async function carregarLista() {
+    const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
+    try {
+        const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
 
+        if (!response.ok) {
+            throw new Error("Erro ao carregar lista de colaboradores");
+        }
 
+        const usuario = await response.json();
+        const colaboradores = usuario.colaboradores;
 
+        const lista = document.querySelector("#listaCadastros");
+        lista.innerHTML = "";
 
-
+        colaboradores.reverse().forEach((colaborador) => adicionarNaLista(colaborador));
+    } catch (error) {
+        console.error("Erro ao carregar lista:", error);
+    }
 }
+
 // pesquisar colaborador
 
-pesquisar.addEventListener("keyup", ()=>{
+pesquisar.addEventListener("keyup", async () => {
+    let valor = pesquisar.value.toLowerCase();
+    const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
 
-    
-    let usuario = usuarioLogado.innerHTML;
-    let cadastros= JSON.parse(localStorage.getItem(usuario)) || [];
-    let valor = pesquisar.value.toLowerCase(); 
-    const lista = document.querySelector("#listaCadastros")
-    lista.innerHTML = "";
-    cadastros[0].colaboradores.forEach(item=>{
-        if(item.nome.toLowerCase().includes(valor) || item.email.toLowerCase().includes(valor)){
-            adicionarNaLista(item);
+    try {
+        const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
+
+        if (!response.ok) {
+            throw new Error("Erro ao carregar colaboradores para pesquisa");
         }
-    });
 
-    
+        const Usuario = await response.json();
+        const colaboradores = Usuario.colaboradores;
+        const lista = document.querySelector("#listaCadastros");
+        lista.innerHTML = "";
+
+        colaboradores
+            .filter((item) => item.nome.toLowerCase().includes(valor) || item.email.toLowerCase().includes(valor))
+            .forEach((item) => adicionarNaLista(item));
+    } catch (error) {
+        console.error("Erro na pesquisa:", error);
+    }
 });
 
 // dashborde
 
-function carregarDashborde() {
+ async function carregarDashborde() {
     let dashbordeTotal = document.querySelector("#dashboard-div1");
-    let dashbordeAtivo = document.querySelector( "#dashboard-div2");
+    let dashbordeAtivo = document.querySelector("#dashboard-div2");
     let dashbordeInativo = document.querySelector("#dashboard-div3");
-    let usuario = usuarioLogado.innerHTML;
+    let usuarioId= JSON.parse(localStorage.getItem("UsuarioId"));
 
-    let cadastros= JSON.parse(localStorage.getItem(usuario))||[];
+    try {
 
-   let totalCadastro=cadastros[0].colaboradores.length
-    let totalAtivo = cadastros[0].colaboradores.filter(item=> item.ativo).length;
-    let totalInativo = cadastros[0].colaboradores.filter(item=> !item.ativo).length;
+        const response= await fetch(`${API_URL}/Usuarios/${usuarioId}`);
+        if (!response.ok) {
+            throw new Error("Erro ao carregar lista de colaboradores");
+        }
+
+        const usuario= await response.json();
+        const cadastros = usuario.colaboradores;
+
+        
+    let totalCadastro = cadastros.length
+    let totalAtivo = cadastros.filter(item => item.ativo).length;
+    let totalInativo = cadastros.filter(item => !item.ativo).length;
 
     dashbordeTotal.innerHTML = totalCadastro;
     dashbordeAtivo.innerHTML = totalAtivo;
     dashbordeInativo.innerHTML = totalInativo;
+
+    } catch(error) {
+        console.error("Erro ao carregar lista:", error);
+
+     }
+
 
 }
 
@@ -116,12 +148,12 @@ function carregarDashborde() {
 
 //Admin - Cadastro de usuarios
 
-function abrirTelaAdmin(){
+function abrirTelaAdmin() {
     let usuario = usuarioLogado.innerHTML;
     const usuarioAdmin = JSON.parse(localStorage.getItem(usuario));
-    if(usuarioAdmin[0].admin == true){
-    window.location.href = "../admin/admin.html";
-    }else{
+    if (usuarioAdmin[0].admin == true) {
+        window.location.href = "../admin/admin.html";
+    } else {
         alert("Acesso negado!");
     }
 }
