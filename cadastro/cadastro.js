@@ -181,7 +181,7 @@ async function excluirColaborador(id, item) {
         }
 
         item.remove();
-        alert("Colaborador excluído com sucesso!");
+        
     } catch (error) {
         console.error("Erro ao excluir colaborador:", error);
     }
