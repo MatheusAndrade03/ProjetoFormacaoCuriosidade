@@ -92,24 +92,16 @@ function cadastrarUsuario(event) {
         return;
     }
 
-    const usuarios = [{
-        usuario,
+    const usuarios = {
+        ,
         senha,
         email,
-        admin,
+        admin
 
-        colaboradores: [
-                {
-                        nome: "matheus",
-                        email: "matheus@gmail.com",
-                        ativo: true
+       
 
+};
 
-                }
-        ]
-
-}
-];
 
     localStorage.setItem(usuario , JSON.stringify(usuarios));
     alert("Usuario criado com sucesso!");
