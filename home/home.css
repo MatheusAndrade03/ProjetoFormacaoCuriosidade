@@ -91,6 +91,9 @@ nav .menu-wrap>li{
     gap: 15px;
     padding: 5px;
 }
+nav .menu-wrap>.li-admin{
+    display: none;
+}
 nav .menu-wrap>.li-borda{
     box-shadow: 0px 1px 0px #3a2613;
 }

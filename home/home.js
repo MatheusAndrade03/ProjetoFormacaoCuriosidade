@@ -22,6 +22,9 @@ function fecharMenu() {
 
 // carrega ao iniciar a tela
 function onLoad() {
+    verificarLogado();
+    debugger;
+    carregarTelaAdmin();
     carregarUsuarioLogado();
     carregarLista();
     carregarDashborde()
@@ -146,7 +149,7 @@ async function carregarDashborde() {
 
 
 
-//Admin - Cadastro de usuarios
+//Admin - abrir tela admin
 
 async function abrirTelaAdmin() {
 
@@ -176,5 +179,48 @@ async function abrirTelaAdmin() {
 
     }
 
+
+}
+// carregar tela admin
+ async function carregarTelaAdmin() {
+    const liAdmin = document.querySelector(".li-admin");
+    const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
+
+    try {
+        const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
+        if (!response.ok) {
+            throw new Error("Erro ao carregar lista de Usuarios");
+
+        }
+        const usuarioAdmin = await response.json();
+
+
+
+        if (usuarioAdmin.admin == true) {
+            liAdmin.style.display = "flex";
+            
+        } else {
+            liAdmin.style.display = "none";
+        }
+
+
+    } catch {
+
+        console.error("Erro ao carregar lista:", error);
+
+
+    }
+
+
+}
+
+// verificar se esta logado 
+
+function verificarLogado() {
+
+    let status = JSON.parse(sessionStorage.getItem("status"));
+    if (status == false || status == null) {
+        window.location.replace("../index.html");
+    }
 
 }

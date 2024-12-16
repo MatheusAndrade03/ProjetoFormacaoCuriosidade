@@ -44,6 +44,8 @@ function fecharMenu() {
 
 // carrega ao iniciar a tela
 function onLoad() {
+    verificarLogado();
+    VerificarAdmin();
     carregarUsuarioLogado();
     carregarLista()
 
@@ -299,4 +301,43 @@ function abrirModal(usuario) {
             alert("Erro ao editar usuário. Tente novamente mais tarde.");
         }
     }
+
+    function verificarLogado() {
+
+        let status = JSON.parse(sessionStorage.getItem("status"));
+        if (status == false || status == null) {
+            
+            window.location.replace("../index.html");
+        }
     
+    }
+
+
+    async function VerificarAdmin() {
+
+        const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
+    
+        try {
+            const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
+            if (!response.ok) {
+                throw new Error("Erro ao carregar lista de Usuarios");
+    
+            }
+            const usuarioAdmin = await response.json();
+    
+    
+    
+            if (usuarioAdmin.admin == false) {
+                window.location.href = "../home/home.html";
+            } 
+    
+    
+        } catch {
+    
+            console.error("Erro ao carregar lista:", error);
+    
+    
+        }
+    
+    
+    }

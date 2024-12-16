@@ -21,6 +21,8 @@ function fecharMenu(){
 
 // carrega ao iniciar a tela
 function onLoad(){
+    verificarLogado();
+    carregarTelaAdmin();
     carregarUsuarioLogado();
 }
 
@@ -72,6 +74,48 @@ async function abrirTelaAdmin() {
             window.location.href = "../admin/admin.html";
         } else {
             alert("Acesso negado!");
+        }
+
+
+    } catch {
+
+        console.error("Erro ao carregar lista:", error);
+
+
+    }
+
+
+}
+// verifica se esta logado
+function verificarLogado() {
+
+    let status = JSON.parse(sessionStorage.getItem("status"));
+    if (status == false || status == null) {
+        window.location.replace("../index.html");
+    }
+
+}
+
+// carregar tela admin
+async function carregarTelaAdmin() {
+    const liAdmin = document.querySelector(".li-admin");
+    const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
+
+    try {
+        const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
+        if (!response.ok) {
+            throw new Error("Erro ao carregar lista de Usuarios");
+
+        }
+        const usuarioAdmin = await response.json();
+
+
+
+        if (usuarioAdmin.admin == true) {
+            liAdmin.style.display = "flex";
+            
+        } else {
+            liAdmin.style.display = "none";
         }
 
 
