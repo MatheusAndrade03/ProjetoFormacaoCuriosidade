@@ -141,7 +141,7 @@ function adicionarNaLista(usuario) {
     btnEditar.addEventListener("click", () => {
         abrirModal(usuario);
         btnconfirmarEdit.addEventListener("click", () => {
-            debugger;
+            debugger
             editarUsuario(usuario);
 
         })
@@ -261,23 +261,23 @@ function abrirModal(usuario) {
 
     async function editarUsuario(user) {
         try {
-            // Recupera os valores dos campos de formulário
+         
             const usuario = formUsuarioEdit.value;
             const senha = formSenhaEdit.value;
             const email = formEmailEdit.value;
             const admin = radioAdminEdit.checked;
     
-            // Monta o objeto atualizado do usuário
+          
             const usuarioAtualizado = {
                 id: user.id,
-                usuario,
-                senha,
+                nomeUsuario: usuario,
                 email,
+                senha,
                 admin
             };
     
-            // Envia uma requisição PUT para atualizar o usuário no servidor
-            const response = await fetch(`https://localhost:7222/api/Usuarios/${user.id}`, {
+            
+            const response = await fetch(`${API_URL}/Usuarios/${user.id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -291,7 +291,6 @@ function abrirModal(usuario) {
     
           
     
-            // Atualiza a interface do usuário
             adicionarNaLista(usuarioAtualizado);
     
             alert("Usuário editado com sucesso!");

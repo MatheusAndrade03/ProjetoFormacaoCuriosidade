@@ -110,35 +110,35 @@ pesquisar.addEventListener("keyup", async () => {
 
 // dashborde
 
- async function carregarDashborde() {
+async function carregarDashborde() {
     let dashbordeTotal = document.querySelector("#dashboard-div1");
     let dashbordeAtivo = document.querySelector("#dashboard-div2");
     let dashbordeInativo = document.querySelector("#dashboard-div3");
-    let usuarioId= JSON.parse(localStorage.getItem("UsuarioId"));
+    let usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
 
     try {
 
-        const response= await fetch(`${API_URL}/Usuarios/${usuarioId}`);
+        const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
         if (!response.ok) {
             throw new Error("Erro ao carregar lista de colaboradores");
         }
 
-        const usuario= await response.json();
+        const usuario = await response.json();
         const cadastros = usuario.colaboradores;
 
-        
-    let totalCadastro = cadastros.length
-    let totalAtivo = cadastros.filter(item => item.ativo).length;
-    let totalInativo = cadastros.filter(item => !item.ativo).length;
 
-    dashbordeTotal.innerHTML = totalCadastro;
-    dashbordeAtivo.innerHTML = totalAtivo;
-    dashbordeInativo.innerHTML = totalInativo;
+        let totalCadastro = cadastros.length
+        let totalAtivo = cadastros.filter(item => item.ativo).length;
+        let totalInativo = cadastros.filter(item => !item.ativo).length;
 
-    } catch(error) {
+        dashbordeTotal.innerHTML = totalCadastro;
+        dashbordeAtivo.innerHTML = totalAtivo;
+        dashbordeInativo.innerHTML = totalInativo;
+
+    } catch (error) {
         console.error("Erro ao carregar lista:", error);
 
-     }
+    }
 
 
 }
@@ -148,12 +148,33 @@ pesquisar.addEventListener("keyup", async () => {
 
 //Admin - Cadastro de usuarios
 
-function abrirTelaAdmin() {
-    let usuario = usuarioLogado.innerHTML;
-    const usuarioAdmin = JSON.parse(localStorage.getItem(usuario));
-    if (usuarioAdmin[0].admin == true) {
-        window.location.href = "../admin/admin.html";
-    } else {
-        alert("Acesso negado!");
+async function abrirTelaAdmin() {
+
+    const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
+
+    try {
+        const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
+        if (!response.ok) {
+            throw new Error("Erro ao carregar lista de Usuarios");
+
+        }
+        const usuarioAdmin = await response.json();
+
+
+
+        if (usuarioAdmin.admin == true) {
+            window.location.href = "../admin/admin.html";
+        } else {
+            alert("Acesso negado!");
+        }
+
+
+    } catch {
+
+        console.error("Erro ao carregar lista:", error);
+
+
     }
+
+
 }

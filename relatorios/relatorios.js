@@ -1,6 +1,6 @@
 
 const usuarioLogado = document.querySelector("#usuario-logado");
-
+const API_URL = "https://localhost:7222/api";
 // abrir menu
 function abrirMenu(){
     let nav = document.querySelector(".nav");
@@ -51,12 +51,36 @@ btnSair.addEventListener("click", function(){
 
 //Admin - Cadastro de usuarios
 
-function abrirTelaAdmin(){
-    let usuario = usuarioLogado.innerHTML;
-    const usuarioAdmin = JSON.parse(localStorage.getItem(usuario));
-    if(usuarioAdmin[0].admin == true){
-    window.location.href = "../admin/admin.html";
-    }else{
-        alert("Acesso negado!");
+
+
+async function abrirTelaAdmin() {
+   
+
+    const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
+
+    try {
+        const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
+        if (!response.ok) {
+            throw new Error("Erro ao carregar lista de Usuarios");
+
+        }
+        const usuarioAdmin = await response.json();
+
+
+
+        if (usuarioAdmin.admin == true) {
+            window.location.href = "../admin/admin.html";
+        } else {
+            alert("Acesso negado!");
+        }
+
+
+    } catch {
+
+        console.error("Erro ao carregar lista:", error);
+
+
     }
+
+
 }
