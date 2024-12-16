@@ -124,6 +124,10 @@ async function cadastrarColaborador(event) {
         formSentimentos.value = "";
         formValores.value = "";
         radioAtivo.checked = false;
+        formNome.style.border = "none";
+        formIdade.style.border = "none";
+        formEmail.style.border = "none";
+        formEndereco.style.border = "none";
     } catch (error) {
         console.error("Erro ao cadastrar colaborador:", error);
     }
