@@ -8,7 +8,6 @@ function abrirMenu() {
     nav.style.display = "block";
     nav.style.left = "0";
     overflow.style.display = "block";
-
 }
 
 // fehar menu
@@ -57,7 +56,7 @@ btnSair.addEventListener("click", function () {
 function adicionarNaLista(colaborador) {
     const lista = document.querySelector("#listaCadastros");
     const item = document.createElement('li');
-    item.innerHTML = `<p><abbr title="${colaborador.nome}">${colaborador.nome}</abbr></p>  <p><abbr title="${colaborador.email}">${colaborador.email}</abbr></p> <p class="pAtivo ${colaborador.ativo ? "ativo" : "inativo"}">${colaborador.ativo ? "ativo" : "inativo"}</p>`;
+    item.innerHTML = `<p><abbr title="${colaborador.nome}">${colaborador.nome}</abbr></p>  <p><abbr title="${colaborador.email}">${colaborador.email}</abbr></p> <p class="pAtivo ${colaborador.ativo ? "ativo" : "inativo"}">${colaborador.ativo ? "Ativo" : "Inativo"}</p>`;
 
     lista.appendChild(item);
 
@@ -120,16 +119,12 @@ async function carregarDashborde() {
     let usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
 
     try {
-
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
         if (!response.ok) {
             throw new Error("Erro ao carregar lista de colaboradores");
         }
-
         const usuario = await response.json();
         const cadastros = usuario.colaboradores;
-
-
         let totalCadastro = cadastros.length
         let totalAtivo = cadastros.filter(item => item.ativo).length;
         let totalInativo = cadastros.filter(item => !item.ativo).length;
@@ -142,8 +137,6 @@ async function carregarDashborde() {
         console.error("Erro ao carregar lista:", error);
 
     }
-
-
 }
 
 
@@ -152,9 +145,7 @@ async function carregarDashborde() {
 //Admin - abrir tela admin
 
 async function abrirTelaAdmin() {
-
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
-
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
         if (!response.ok) {
@@ -162,65 +153,41 @@ async function abrirTelaAdmin() {
 
         }
         const usuarioAdmin = await response.json();
-
-
-
         if (usuarioAdmin.admin == true) {
             window.location.href = "../admin/admin.html";
         } else {
             alert("Acesso negado!");
         }
-
-
     } catch {
-
         console.error("Erro ao carregar lista:", error);
-
-
     }
-
-
 }
 // carregar tela admin
- async function carregarTelaAdmin() {
+async function carregarTelaAdmin() {
     const liAdmin = document.querySelector(".li-admin");
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
-
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
         if (!response.ok) {
             throw new Error("Erro ao carregar lista de Usuarios");
-
         }
         const usuarioAdmin = await response.json();
-
-
-
         if (usuarioAdmin.admin == true) {
             liAdmin.style.display = "flex";
-            
+
         } else {
             liAdmin.style.display = "none";
         }
-
-
     } catch {
-
         console.error("Erro ao carregar lista:", error);
-
-
     }
-
-
 }
 
 // verificar se esta logado 
 
 function verificarLogado() {
-
     let status = JSON.parse(sessionStorage.getItem("status"));
     if (status == false || status == null) {
         window.location.replace("../index.html");
     }
-
 }

@@ -65,9 +65,8 @@ btnImprimir.addEventListener("click", function(){
 function adicionarNaLista(colaborador) {
     const lista = document.querySelector("#listaCadastros");
     const item = document.createElement('li');
-    item.innerHTML = `<p><abbr title="${colaborador.nome}">${colaborador.nome}</abbr></p> <p><abbr title="${colaborador.email}">${colaborador.email}</abbr></p> <p class="pAtivo ${colaborador.ativo?"ativo":"inativo"}">${colaborador.ativo?"ativo":"inativo"}</p>`;
+    item.innerHTML = `<p><abbr title="${colaborador.nome}">${colaborador.nome}</abbr></p> <p><abbr title="${colaborador.email}">${colaborador.email}</abbr></p> <p class="pAtivo ${colaborador.ativo?"ativo":"inativo"}">${colaborador.ativo?"Ativo":"Inativo"}</p>`;
     lista.appendChild(item);
-
 }
 
 
@@ -76,11 +75,9 @@ async function carregarLista() {
     const usuarioId= JSON.parse(localStorage.getItem("UsuarioId"));
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
-
         if (!response.ok) {
             throw new Error("Erro ao carregar lista de colaboradores");
         }
-
         const usuario = await response.json();
         const colaboradores = usuario.colaboradores;
         
@@ -98,19 +95,16 @@ async function carregarLista() {
 pesquisar.addEventListener("keyup", async () => {
     let valor = pesquisar.value.toLowerCase();
     const usuarioId= JSON.parse(localStorage.getItem("UsuarioId"));
-
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
 
         if (!response.ok) {
             throw new Error("Erro ao carregar colaboradores para pesquisa");
         }
-
         const Usuario = await response.json();
         const colaboradores = Usuario.colaboradores;
         const lista = document.querySelector("#listaCadastros");
         lista.innerHTML = "";
-
         colaboradores
             .filter((item) => item.nome.toLowerCase().includes(valor) || item.email.toLowerCase().includes(valor))
             .forEach((item) => adicionarNaLista(item));
@@ -124,73 +118,45 @@ pesquisar.addEventListener("keyup", async () => {
 
 
 async function abrirTelaAdmin() {
-
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
-
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
         if (!response.ok) {
             throw new Error("Erro ao carregar lista de Usuarios");
-
         }
         const usuarioAdmin = await response.json();
-
-
-
         if (usuarioAdmin.admin == true) {
             window.location.href = "../admin/admin.html";
         } else {
             alert("Acesso negado!");
         }
-
-
     } catch {
-
         console.error("Erro ao carregar lista:", error);
-
-
     }
-
-
 }
 // verifica se esta logado
 function verificarLogado() {
-
     let status = JSON.parse(sessionStorage.getItem("status"));
     if (status == false || status == null) {
         window.location.replace("../index.html");
     }
-
 }
 // carregar tela admin
 async function carregarTelaAdmin() {
     const liAdmin = document.querySelector(".li-admin");
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
-
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
         if (!response.ok) {
             throw new Error("Erro ao carregar lista de Usuarios");
-
         }
         const usuarioAdmin = await response.json();
-
-
-
         if (usuarioAdmin.admin == true) {
             liAdmin.style.display = "flex";
-            
         } else {
             liAdmin.style.display = "none";
         }
-
-
     } catch {
-
         console.error("Erro ao carregar lista:", error);
-
-
     }
-
-
 }

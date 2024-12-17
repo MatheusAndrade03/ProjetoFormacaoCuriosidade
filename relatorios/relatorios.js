@@ -2,9 +2,9 @@
 const usuarioLogado = document.querySelector("#usuario-logado");
 const API_URL = "https://localhost:7222/api";
 // abrir menu
-function abrirMenu(){
+function abrirMenu() {
     let nav = document.querySelector(".nav");
-    let overflow= document.querySelector(  ".overflow");
+    let overflow = document.querySelector(".overflow");
     nav.style.display = "block";
     nav.style.left = "0";
     overflow.style.display = "block";
@@ -12,51 +12,35 @@ function abrirMenu(){
 }
 
 // fehar menu
-function fecharMenu(){
+function fecharMenu() {
     let nav = document.querySelector(".nav");
-    let overflow= document.querySelector(  ".overflow");
+    let overflow = document.querySelector(".overflow");
     nav.style.left = "-400px";
     overflow.style.display = "none";
 }
 
 // carrega ao iniciar a tela
-function onLoad(){
+function onLoad() {
     verificarLogado();
     carregarTelaAdmin();
     carregarUsuarioLogado();
 }
 
-
-
-
 // carregar o usuario logado
-function carregarUsuarioLogado(){
+function carregarUsuarioLogado() {
     const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
     usuarioLogado.innerHTML = usuario;
 }
 
-
-
-
-
-
 // sair do sistema
 const btnSair = document.querySelector(".btn-sair");
 
-
-btnSair.addEventListener("click", function(){
-    window.location.replace ( "../index.html");
+btnSair.addEventListener("click", function () {
+    window.location.replace("../index.html");
 });
-
-
-
-
 //Admin - Cadastro de usuarios
-
-
-
 async function abrirTelaAdmin() {
-   
+
 
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
 
@@ -88,14 +72,12 @@ async function abrirTelaAdmin() {
 }
 // verifica se esta logado
 function verificarLogado() {
-
     let status = JSON.parse(sessionStorage.getItem("status"));
     if (status == false || status == null) {
         window.location.replace("../index.html");
     }
 
 }
-
 // carregar tela admin
 async function carregarTelaAdmin() {
     const liAdmin = document.querySelector(".li-admin");
@@ -108,23 +90,14 @@ async function carregarTelaAdmin() {
 
         }
         const usuarioAdmin = await response.json();
-
-
-
         if (usuarioAdmin.admin == true) {
             liAdmin.style.display = "flex";
-            
+
         } else {
             liAdmin.style.display = "none";
         }
 
-
     } catch {
-
         console.error("Erro ao carregar lista:", error);
-
-
     }
-
-
 }

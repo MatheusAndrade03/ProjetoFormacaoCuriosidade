@@ -18,9 +18,7 @@ const API_URL = "https://localhost:7222/api";
 
 // Botão que aciona cadastrar usuario
 btnSalvar.addEventListener("click", (event) => {
-    
     cadastrarUsuario(event);
-
 })
 
 
@@ -81,8 +79,6 @@ async function cadastrarUsuario(event) {
     let email = formEmail.value;
     let admin = radioAdmin.checked ? true : false;
 
-
-
     // Verifica se ha campos obrigatórios vazios
     if (usuario == "" || senha == "" || email == "") {
         alert("Preencha todos os campos obrigatórios, Nome, Senha e Email");
@@ -93,7 +89,6 @@ async function cadastrarUsuario(event) {
         event.preventDefault();
         return;
     }
-
     const usuarios = {
         nomeUsuario: usuario,
         senha,
@@ -131,9 +126,9 @@ async function cadastrarUsuario(event) {
 function adicionarNaLista(usuario) {
     const lista = document.querySelector("#listaCadastros");
     const item = document.createElement('li');
-    item.innerHTML = `<p>${usuario.nomeUsuario}</p> <p><abbr title="${usuario.email}">${usuario.email}</abbr></p> <button id="btn-editar"><img src="../imagens/edit.png" alt="edit"></button>`;
+    item.innerHTML = `<p>${usuario.nomeUsuario}</p> <p><abbr title="${usuario.email}">${usuario.email}</abbr></p> <button id="btn-editar"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg></button>`;
     const btnExcluir = document.createElement("button");
-    btnExcluir.innerHTML = `X`;
+    btnExcluir.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>`;
     btnExcluir.setAttribute("id", "btn-excluir");
     btnExcluir.addEventListener("click", () => {
         excluirUsuario(usuario);
@@ -145,44 +140,30 @@ function adicionarNaLista(usuario) {
         btnconfirmarEdit.addEventListener("click", () => {
             debugger
             editarUsuario(usuario);
-
         })
     });
-
     item.appendChild(btnExcluir);
     lista.appendChild(item);
-
 }
 
 // carregar a lista de usuarios
 async function carregarLista() {
-
     const response = await fetch(`${API_URL}/Usuarios`);
     if (!response.ok) {
         throw new Error("Erro ao carregar lista de usuarios");
     }
     const usuarios = await response.json();
 
-
     usuarios.forEach((usuario) => {
         if (usuario.admin == false) {
             adicionarNaLista(usuario);
         }
     });
-
-
-
-
-
-
-
 }
 
 // pesquisar usuario
- pesquisar.addEventListener("keyup", async () => {
-    debugger;
-
-
+pesquisar.addEventListener("keyup", async () => {
+   
     let valor = pesquisar.value.toLowerCase();
 
     const response = await fetch(`${API_URL}/Usuarios`);
@@ -194,20 +175,12 @@ async function carregarLista() {
     const lista = document.querySelector("#listaCadastros")
     lista.innerHTML = "";
 
-
-   
     usuarios.filter((item) => item.nomeUsuario.toLowerCase().includes(valor) || item.email.toLowerCase().includes(valor))
-    .forEach((item) =>{
-        if(item.admin==false){
-         adicionarNaLista(item)
-        }
-        
+        .forEach((item) => {
+            if (item.admin == false) {
+                adicionarNaLista(item)
+            }
         });
-
-   
-
-
-
 });
 
 
@@ -215,129 +188,99 @@ async function carregarLista() {
 
 // excluir usuario
 function excluirUsuario(usuario) {
-        try {
-            const response = fetch(`${API_URL}/Usuarios/${usuario.id}`,
-                {
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-
-
-                });
-            if (!response.ok) {
-                throw new Error("Erro ao excluir usuario");
-            }
-        } catch (error) {
-            console.error("Erro ao excluir usuario", error);
+    try {
+        const response = fetch(`${API_URL}/Usuarios/${usuario.id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+        if (!response.ok) {
+            throw new Error("Erro ao excluir usuario");
         }
+    } catch (error) {
+        console.error("Erro ao excluir usuario", error);
     }
+}
 
 
 
 
 // função para abrir modal  para editar usuario
 function abrirModal(usuario) {
-        const modal = document.querySelector("#cadastro-wrapper-editar");
-        const telaLista = document.querySelector(".lista-wrapper");
+    const modal = document.querySelector("#cadastro-wrapper-editar");
+    const telaLista = document.querySelector(".lista-wrapper");
 
-        formUsuarioEdit.value = usuario.nomeUsuario;
-        formSenhaEdit.value = usuario.senha;
-        formEmailEdit.value = usuario.email;
-        radioAdminEdit.checked = usuario.admin
+    formUsuarioEdit.value = usuario.nomeUsuario;
+    formSenhaEdit.value = usuario.senha;
+    formEmailEdit.value = usuario.email;
+    radioAdminEdit.checked = usuario.admin
 
+    telaLista.style.display = "none";
+    modal.style.display = "block";
 
+}
 
+async function editarUsuario(user) {
+    try {
+        const usuario = formUsuarioEdit.value;
+        const senha = formSenhaEdit.value;
+        const email = formEmailEdit.value;
+        const admin = radioAdminEdit.checked;
 
-
-        telaLista.style.display = "none";
-        modal.style.display = "block";
-
-    }
-
-
-
-
-
-
-
-    async function editarUsuario(user) {
-        try {
-         
-            const usuario = formUsuarioEdit.value;
-            const senha = formSenhaEdit.value;
-            const email = formEmailEdit.value;
-            const admin = radioAdminEdit.checked;
-    
-          
-            const usuarioAtualizado = {
-                id: user.id,
-                nomeUsuario: usuario,
-                email,
-                senha,
-                admin
-            };
-    
-            
-            const response = await fetch(`${API_URL}/Usuarios/${user.id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(usuarioAtualizado),
-            });
-    
-            if (!response.ok) {
-                throw new Error(`Erro ao atualizar usuário: ${response.status}`);
-            }
-    
-          
-    
-            adicionarNaLista(usuarioAtualizado);
-    
-            alert("Usuário editado com sucesso!");
-        } catch (error) {
-            console.error("Erro ao editar usuário:", error);
-            alert("Erro ao editar usuário. Tente novamente mais tarde.");
+        const usuarioAtualizado = {
+            id: user.id,
+            nomeUsuario: usuario,
+            email,
+            senha,
+            admin
+        };
+        const response = await fetch(`${API_URL}/Usuarios/${user.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(usuarioAtualizado),
+        });
+        if (!response.ok) {
+            throw new Error(`Erro ao atualizar usuário: ${response.status}`);
         }
+
+        adicionarNaLista(usuarioAtualizado);
+
+        alert("Usuário editado com sucesso!");
+    } catch (error) {
+        console.error("Erro ao editar usuário:", error);
+        alert("Erro ao editar usuário. Tente novamente mais tarde.");
     }
+}
 
-    function verificarLogado() {
+function verificarLogado() {
 
-        let status = JSON.parse(sessionStorage.getItem("status"));
-        if (status == false || status == null) {
-            
-            window.location.replace("../index.html");
+    let status = JSON.parse(sessionStorage.getItem("status"));
+    if (status == false || status == null) {
+        window.location.replace("../index.html");
+    }
+}
+
+
+async function VerificarAdmin() {
+
+    const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
+
+    try {
+        const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
+        if (!response.ok) {
+            throw new Error("Erro ao carregar lista de Usuarios");
         }
-    
-    }
 
+        const usuarioAdmin = await response.json();
 
-    async function VerificarAdmin() {
-
-        const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
-    
-        try {
-            const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
-            if (!response.ok) {
-                throw new Error("Erro ao carregar lista de Usuarios");
-    
-            }
-            const usuarioAdmin = await response.json();
-    
-    
-    
-            if (usuarioAdmin.admin == false) {
-                window.location.href = "../home/home.html";
-            } 
-    
-    
-        } catch {
-    
-            console.error("Erro ao carregar lista:", error);
-    
-    
+        if (usuarioAdmin.admin == false) {
+            window.location.href = "../home/home.html";
         }
-    
-    
+    } catch {
+        console.error("Erro ao carregar lista:", error);
     }
+}

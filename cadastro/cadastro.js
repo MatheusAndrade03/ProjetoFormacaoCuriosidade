@@ -36,6 +36,23 @@ function onLoad() {
     carregarUsuarioLogado();
     carregarLista();
 }
+// abrir menu
+function abrirMenu() {
+    let nav = document.querySelector(".nav");
+    let overflow = document.querySelector(".overflow");
+    nav.style.display = "block";
+    nav.style.left = "0";
+    overflow.style.display = "block";
+}
+
+// fehar menu
+function fecharMenu() {
+    let nav = document.querySelector(".nav");
+    let overflow = document.querySelector(".overflow");
+    nav.style.left = "-400px";
+    overflow.style.display = "none";
+}
+
 
 
 // Botão que aciona cadastrar
@@ -99,9 +116,7 @@ async function cadastrarColaborador(event) {
         event.preventDefault();
         return;
     }
-
     const colaborador = { nome, idade, email, endereco, outrasInfo, interesses, sentimentos, valores, ativo, usuarioId };
-
     try {
         const response = await fetch(`${API_URL}/Colaboradores`, {
             method: "POST",
@@ -144,13 +159,10 @@ async function carregarLista() {
         if (!response.ok) {
             throw new Error("Erro ao carregar lista de colaboradores");
         }
-
         const usuario = await response.json();
         const colaboradores = usuario.colaboradores;
-
         const lista = document.querySelector("#listaCadastros");
         lista.innerHTML = "";
-
         colaboradores.forEach((colaborador) => adicionarNaLista(colaborador));
     } catch (error) {
         console.error("Erro ao carregar lista:", error);
@@ -163,10 +175,10 @@ function adicionarNaLista(colaborador) {
     const item = document.createElement("li");
     item.innerHTML = `<p><abbr title="${colaborador.nome}">${colaborador.nome}</abbr></p> 
                       <p><abbr title="${colaborador.email}">${colaborador.email}</abbr></p> 
-                      <button id="btn-editar"><img src="../imagens/edit.png" alt="edit"></button>`;
+                      <button id="btn-editar"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg></button>`;
 
     const btnExcluir = document.createElement("button");
-    btnExcluir.innerHTML = `X`;
+    btnExcluir.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFFFF"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg>`;
     btnExcluir.setAttribute("id", "btn-excluir");
     btnExcluir.addEventListener("click", () => excluirColaborador(colaborador.id, item));
 
@@ -187,7 +199,7 @@ async function excluirColaborador(id, item) {
         }
 
         item.remove();
-        
+
     } catch (error) {
         console.error("Erro ao excluir colaborador:", error);
     }
@@ -204,7 +216,6 @@ pesquisar.addEventListener("keyup", async () => {
         if (!response.ok) {
             throw new Error("Erro ao carregar colaboradores para pesquisa");
         }
-
         const Usuario = await response.json();
         const colaboradores = Usuario.colaboradores;
         const lista = document.querySelector("#listaCadastros");
@@ -235,8 +246,6 @@ async function editarColaborador(colaborador) {
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
     const colaboradorAtualizado = { id, nome, idade, email, endereco, outrasInfo, interesses, sentimentos, valores, ativo, usuarioId };
 
-
-
     try {
         const response = await fetch(`https://localhost:7222/api/Colaboradores/${id}`, {
             method: "PUT",
@@ -245,7 +254,6 @@ async function editarColaborador(colaborador) {
             },
             body: JSON.stringify(colaboradorAtualizado),
         });
-
         if (!response.ok) {
             throw new Error(`Erro ao atualizar colaborador: ${response.status}`);
         }
@@ -273,10 +281,9 @@ function abrirModal(colaborador) {
     telaLista.style.display = "none";
     modal.style.display = "block";
 
-    // Configurar o botão de salvar edição
     btnconfirmarEdit.onclick = () => {
         editarColaborador(colaborador);
-        modal.style.display = "none"; // Fechar o modal após a edição
+        modal.style.display = "none";
         telaLista.style.display = "block";
     };
 }
@@ -285,34 +292,21 @@ function abrirModal(colaborador) {
 
 
 async function abrirTelaAdmin() {
-
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
-
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
         if (!response.ok) {
             throw new Error("Erro ao carregar lista de Usuarios");
-
         }
         const usuarioAdmin = await response.json();
-
-
-
         if (usuarioAdmin.admin == true) {
             window.location.href = "../admin/admin.html";
         } else {
             alert("Acesso negado!");
         }
-
-
     } catch {
-
         console.error("Erro ao carregar lista:", error);
-
-
     }
-
-
 }
 // verifica se esta logado
 function verificarLogado() {
@@ -327,31 +321,19 @@ function verificarLogado() {
 async function carregarTelaAdmin() {
     const liAdmin = document.querySelector(".li-admin");
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
-
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
         if (!response.ok) {
             throw new Error("Erro ao carregar lista de Usuarios");
-
         }
         const usuarioAdmin = await response.json();
-
-
-
         if (usuarioAdmin.admin == true) {
             liAdmin.style.display = "flex";
-            
+
         } else {
             liAdmin.style.display = "none";
         }
-
-
     } catch {
-
         console.error("Erro ao carregar lista:", error);
-
-
     }
-
-
 }
