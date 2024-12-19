@@ -130,7 +130,7 @@ async function cadastrarColaborador(event) {
         }
 
         alert("Colaborador cadastrado com sucesso!");
-        abrirLista();
+         abrirLista();
         carregarLista();
         formNome.value = "";
         formIdade.value = "";

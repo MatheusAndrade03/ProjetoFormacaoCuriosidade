@@ -1,7 +1,7 @@
 //constantes
 const usuarioLogado = document.querySelector("#usuario-logado");
 const btnSair = document.querySelector(".btn-sair");
-const btnSalvar = document.querySelector('.btn-salvar');
+const btnSalvar = document.querySelector('#btn-cadastrar');
 const pesquisar = document.querySelector("#pesquisarId");
 // campos do formulário
 const formUsuario = document.querySelector('#usuario');
@@ -20,6 +20,13 @@ const API_URL = "https://localhost:7222/api";
 btnSalvar.addEventListener("click", (event) => {
     cadastrarUsuario(event);
 })
+// abrir lista
+function abrirLista() {
+    const telaLista = document.querySelector(".lista-wrapper");
+    const telaCadastro =document.querySelector("#cadastro-wrapper-cadastro");
+    telaLista.style.display = "block";
+    telaCadastro.style.display = "none";
+}
 
 
 // abrir menu
@@ -66,7 +73,7 @@ btnSair.addEventListener("click", function () {
 // função para abrir a tela de cadastro
 function abrirCadastro() {
     const telaLista = document.querySelector(".lista-wrapper");
-    const telaCadastro = document.querySelector(".cadastro-wrapper");
+    const telaCadastro = document.querySelector("#cadastro-wrapper-cadastro");
     telaLista.style.display = "none";
     telaCadastro.style.display = "block";
 
@@ -74,6 +81,8 @@ function abrirCadastro() {
 
 // cadastrar usuario
 async function cadastrarUsuario(event) {
+    event.preventDefault();
+    debugger;
     let usuario = formUsuario.value;
     let senha = formSenha.value;
     let email = formEmail.value;
@@ -109,7 +118,9 @@ async function cadastrarUsuario(event) {
             throw new Error(error.message || "Erro ao cadastrar usuario");
         }
 
-        carregarLista();
+        
+         carregarLista();
+         abrirLista();
         formUsuario.value = "";
         formSenha.value = "";
         formEmail.value = "";
@@ -137,10 +148,6 @@ function adicionarNaLista(usuario) {
     const btnEditar = item.querySelector("#btn-editar");
     btnEditar.addEventListener("click", () => {
         abrirModal(usuario);
-        btnconfirmarEdit.addEventListener("click", () => {
-            debugger
-            editarUsuario(usuario);
-        })
     });
     item.appendChild(btnExcluir);
     lista.appendChild(item);
@@ -153,7 +160,8 @@ async function carregarLista() {
         throw new Error("Erro ao carregar lista de usuarios");
     }
     const usuarios = await response.json();
-
+    const lista = document.querySelector("#listaCadastros");
+    lista.innerHTML = "";
     usuarios.forEach((usuario) => {
         if (usuario.admin == false) {
             adicionarNaLista(usuario);
@@ -220,22 +228,30 @@ function abrirModal(usuario) {
     telaLista.style.display = "none";
     modal.style.display = "block";
 
+    btnconfirmarEdit.onclick = (event) => {
+        event.preventDefault();
+        editarUsuario(usuario);
+        modal.style.display = "none";
+        telaLista.style.display = "block";
+    };
 }
 
 async function editarUsuario(user) {
-    try {
-        const usuario = formUsuarioEdit.value;
-        const senha = formSenhaEdit.value;
-        const email = formEmailEdit.value;
-        const admin = radioAdminEdit.checked;
+  
+    const usuario = formUsuarioEdit.value;
+    const senha = formSenhaEdit.value;
+    const email = formEmailEdit.value;
+    const admin = radioAdminEdit.checked;
 
-        const usuarioAtualizado = {
+    const usuarioAtualizado = {
             id: user.id,
             nomeUsuario: usuario,
             email,
             senha,
             admin
         };
+
+    try {
         const response = await fetch(`${API_URL}/Usuarios/${user.id}`, {
             method: "PUT",
             headers: {
@@ -247,8 +263,8 @@ async function editarUsuario(user) {
             throw new Error(`Erro ao atualizar usuário: ${response.status}`);
         }
 
-        adicionarNaLista(usuarioAtualizado);
-
+        carregarLista();
+        
         alert("Usuário editado com sucesso!");
     } catch (error) {
         console.error("Erro ao editar usuário:", error);
