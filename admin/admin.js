@@ -112,11 +112,15 @@ async function cadastrarUsuario(event) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(usuarios),
         });
-
+        if(response.status == 400){
+            alert("Email já cadastrado");
+            return;
+        }
         if (!response.ok) {
             const error = await response.json();
             throw new Error(error.message || "Erro ao cadastrar usuario");
         }
+        
 
         
          carregarLista();
