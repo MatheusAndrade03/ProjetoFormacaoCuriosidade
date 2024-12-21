@@ -22,7 +22,6 @@ function fecharMenu() {
 // carrega ao iniciar a tela
 function onLoad() {
     verificarLogado();
-    debugger;
     carregarTelaAdmin();
     carregarUsuarioLogado();
     carregarLista();

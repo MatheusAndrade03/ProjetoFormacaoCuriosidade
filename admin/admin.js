@@ -121,8 +121,6 @@ async function cadastrarUsuario(event) {
             throw new Error(error.message || "Erro ao cadastrar usuario");
         }
         
-
-        
          carregarLista();
          abrirLista();
         formUsuario.value = "";
@@ -241,7 +239,7 @@ function abrirModal(usuario) {
 }
 
 async function editarUsuario(user) {
-  
+  debugger;
     const usuario = formUsuarioEdit.value;
     const senha = formSenhaEdit.value;
     const email = formEmailEdit.value;
@@ -263,13 +261,17 @@ async function editarUsuario(user) {
             },
             body: JSON.stringify(usuarioAtualizado),
         });
+        if(response.status == 400){
+            alert("Email já cadastrado");
+            return;
+        }
         if (!response.ok) {
             throw new Error(`Erro ao atualizar usuário: ${response.status}`);
         }
 
         carregarLista();
         
-        alert("Usuário editado com sucesso!");
+        
     } catch (error) {
         console.error("Erro ao editar usuário:", error);
         alert("Erro ao editar usuário. Tente novamente mais tarde.");

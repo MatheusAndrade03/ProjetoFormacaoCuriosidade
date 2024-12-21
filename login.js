@@ -25,11 +25,11 @@ async function onLoad() {
     let status = false;
     sessionStorage.setItem('status', JSON.stringify(status));
     try {
-      
+
         const response = await fetch('https://localhost:7222/api/Usuarios');
         if (!response.ok) throw new Error('Erro ao acessar API de usuários');
         const usuarios = await response.json();
-       
+
         for (const usuarioInicial of usuariosIniciais) {
             const usuarioExiste = usuarios.some(user => user.email === usuarioInicial.email);
             if (!usuarioExiste) {
@@ -66,11 +66,18 @@ btnEntrar.addEventListener("click", (event) => {
 async function entrar() {
     if (validarCampos()) {
         try {
-            const usuarioValido = await validarLoginESenha();
-            if (usuarioValido) {
+            //const usuarioValido = await validarLoginESenha();
+            let token = await VerificarLoginByToken();
+
+            if (token) {
                 alert('Login bem-sucedido!');
-                localStorage.setItem('usuarioLogado', JSON.stringify(usuarioValido.nomeUsuario));
-                localStorage.setItem('UsuarioId', JSON.stringify(usuarioValido.id));
+                const decodedToken = jwt_decode(token);
+                let nomeUsuario = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+                let role = decodedToken["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+                let userId = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
+                const usuario = { nomeUsuario, role, userId }
+                localStorage.setItem('usuarioLogado', JSON.stringify(usuario.nomeUsuario));
+                localStorage.setItem('UsuarioId', JSON.stringify(usuario.userId));
                 let status = true;
                 sessionStorage.setItem('status', JSON.stringify(status));
                 window.location.href = 'home/home.html';
@@ -118,6 +125,41 @@ async function validarLoginESenha() {
         console.error('Erro ao buscar usuários:', error);
         return false;
     }
+}
+
+async function VerificarLoginByToken() {
+    debugger;
+    const emailValor = email.value.trim();
+    const senhaValor = senha.value.trim();
+
+    const login = { senha: senhaValor, email: emailValor };
+
+    try {
+        const response = await fetch(`https://localhost:7222/api/Authentication/login`, {
+
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(login)
+
+        });
+        if (!response.ok) {
+            throw new Error('Erro ao acessar API de usuários');
+        } else {
+
+            const tokenResponse = await response.json();
+
+            const token = tokenResponse.token;
+            return token || false;
+
+        }
+
+    } catch (error) {
+        console.error('Erro ao buscar usuários:', error);
+        return false;
+    }
+
+
+
 }
 
 
