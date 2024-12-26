@@ -67,7 +67,7 @@ async function entrar() {
     if (validarCampos()) {
         try {
             //const usuarioValido = await validarLoginESenha();
-            let token = await VerificarLoginByToken();
+            let token = await verificarLoginByToken();
 
             if (token) {
                 alert('Login bem-sucedido!');
@@ -80,6 +80,8 @@ async function entrar() {
                 localStorage.setItem('UsuarioId', JSON.stringify(usuario.userId));
                 let status = true;
                 sessionStorage.setItem('status', JSON.stringify(status));
+                localStorage.setItem('horaLogin', JSON.stringify(horaAtual()));
+                localStorage.setItem('horaLimite', JSON.stringify(horaAtual() + 15));
                 window.location.href = 'home/home.html';
             } else {
                 alert('Email ou senha incorretos.');
@@ -127,7 +129,7 @@ async function validarLoginESenha() {
     }
 }
 
-async function VerificarLoginByToken() {
+async function verificarLoginByToken() {
     debugger;
     const emailValor = email.value.trim();
     const senhaValor = senha.value.trim();
@@ -162,4 +164,13 @@ async function VerificarLoginByToken() {
 
 }
 
+function horaAtual() {
+    let data = new Date();
+    let hora = data.getHours();
+    hora = hora * 60;
+    let min = data.getMinutes();
+   let horaTotal = hora + min;
+    
+    return horaTotal;
+}
 

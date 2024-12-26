@@ -31,6 +31,7 @@ function fecharMenu(){
 // carrega ao iniciar a tela
 function onLoad(){
     verificarLogado();
+    verificarExpiracao();
     carregarTelaAdmin();
     carregarUsuarioLogado();
     carregarLista()
@@ -160,3 +161,20 @@ async function carregarTelaAdmin() {
         console.error("Erro ao carregar lista:", error);
     }
 }
+function verificarExpiracao(){
+    debugger
+    let hora = new Date().getHours();
+    let minuto = new Date().getMinutes();
+    hora= hora*60;
+    let horaAtual = hora + minuto;
+    let horaLimite = JSON.parse(localStorage.getItem("horaLimite"));
+    let status = JSON.parse(sessionStorage.getItem("status"));
+     if (horaAtual >= horaLimite) {
+            status = false;
+            sessionStorage.setItem('status', JSON.stringify(status));
+        }else{
+            status = true;
+            sessionStorage.setItem('status', JSON.stringify(status));
+        }
+       verificarLogado();
+    }
