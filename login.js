@@ -9,23 +9,19 @@ const usuariosIniciais = [
         senha: "admin",
         email: "admin@gmail.com",
         admin: true
-
     },
     {
         nomeUsuario: "matheus",
         senha: "matheus123",
         email: "matheus@gmail.com",
         admin: false
-
     }
 ];
-
 // Ao carregar a página
 async function onLoad() {
     let status = false;
     sessionStorage.setItem('status', JSON.stringify(status));
     try {
-
         const response = await fetch('https://localhost:7222/api/Usuarios');
         if (!response.ok) throw new Error('Erro ao acessar API de usuários');
         const usuarios = await response.json();
@@ -68,7 +64,6 @@ async function entrar() {
         try {
             //const usuarioValido = await validarLoginESenha();
             let token = await verificarLoginByToken();
-
             if (token) {
                 alert('Login bem-sucedido!');
                 const decodedToken = jwt_decode(token);
@@ -81,7 +76,7 @@ async function entrar() {
                 let status = true;
                 sessionStorage.setItem('status', JSON.stringify(status));
                 localStorage.setItem('horaLogin', JSON.stringify(horaAtual()));
-                localStorage.setItem('horaLimite', JSON.stringify(horaAtual() + 15));
+                localStorage.setItem('horaLimite', JSON.stringify(horaAtual() + 1));
                 window.location.href = 'home/home.html';
             } else {
                 alert('Email ou senha incorretos.');
@@ -106,7 +101,6 @@ function validarCampos() {
         alert('Email inválido. Certifique-se de que contém "@" e termina com ".com".');
         return false;
     }
-
     return true;
 }
 
@@ -114,7 +108,6 @@ function validarCampos() {
 async function validarLoginESenha() {
     const emailValor = email.value.trim();
     const senhaValor = senha.value.trim();
-
     try {
         const response = await fetch('https://localhost:7222/api/Usuarios');
         if (!response.ok) throw new Error('Erro ao acessar API de usuários');
@@ -130,10 +123,8 @@ async function validarLoginESenha() {
 }
 
 async function verificarLoginByToken() {
-    debugger;
     const emailValor = email.value.trim();
     const senhaValor = senha.value.trim();
-
     const login = { senha: senhaValor, email: emailValor };
 
     try {
@@ -147,21 +138,15 @@ async function verificarLoginByToken() {
         if (!response.ok) {
             throw new Error('Erro ao acessar API de usuários');
         } else {
-
             const tokenResponse = await response.json();
-
             const token = tokenResponse.token;
             return token || false;
-
         }
 
     } catch (error) {
         console.error('Erro ao buscar usuários:', error);
         return false;
     }
-
-
-
 }
 
 function horaAtual() {
@@ -169,8 +154,7 @@ function horaAtual() {
     let hora = data.getHours();
     hora = hora * 60;
     let min = data.getMinutes();
-   let horaTotal = hora + min;
-    
+    let horaTotal = hora + min;
     return horaTotal;
 }
 

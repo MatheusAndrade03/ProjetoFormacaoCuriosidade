@@ -94,7 +94,7 @@ function abrirLista() {
 // função para cadastrar um novo colaborador
 async function cadastrarColaborador(event) {
     event.preventDefault();
-
+    verificarExpiracao();
     let nome = formNome.value;
     let idade = formIdade.value;
     let email = formEmail.value;
@@ -129,9 +129,8 @@ async function cadastrarColaborador(event) {
             const error = await response.json();
             throw new Error(error.message || "Erro ao cadastrar colaborador");
         }
-
         alert("Colaborador cadastrado com sucesso!");
-         abrirLista();
+        abrirLista();
         carregarLista();
         formNome.value = "";
         formIdade.value = "";
@@ -156,7 +155,6 @@ async function carregarLista() {
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
-
         if (!response.ok) {
             throw new Error("Erro ao carregar lista de colaboradores");
         }
@@ -192,15 +190,13 @@ function adicionarNaLista(colaborador) {
 
 // excluir colaborador
 async function excluirColaborador(id, item) {
+    verificarExpiracao();
     try {
         const response = await fetch(`${API_URL}/Colaboradores/${id}`, { method: "DELETE" });
-
         if (!response.ok) {
             throw new Error("Erro ao excluir colaborador");
         }
-
         item.remove();
-
     } catch (error) {
         console.error("Erro ao excluir colaborador:", error);
     }
@@ -210,7 +206,6 @@ async function excluirColaborador(id, item) {
 pesquisar.addEventListener("keyup", async () => {
     let valor = pesquisar.value.toLowerCase();
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
-
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
 
@@ -230,10 +225,9 @@ pesquisar.addEventListener("keyup", async () => {
     }
 });
 
-
-
 // Função para editar um colaborador
 async function editarColaborador(colaborador) {
+    verificarExpiracao();
     const nome = formNomeEdit.value;
     const idade = formIdadeEdit.value;
     const email = formEmailEdit.value;
@@ -246,7 +240,6 @@ async function editarColaborador(colaborador) {
     const id = colaborador.id;
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
     const colaboradorAtualizado = { id, nome, idade, email, endereco, outrasInfo, interesses, sentimentos, valores, ativo, usuarioId };
-
     try {
         const response = await fetch(`https://localhost:7222/api/Colaboradores/${id}`, {
             method: "PUT",
@@ -290,8 +283,6 @@ function abrirModal(colaborador) {
 }
 
 //Admin - Cadastro de usuarios
-
-
 async function abrirTelaAdmin() {
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
     try {
@@ -311,36 +302,30 @@ async function abrirTelaAdmin() {
 }
 // verifica se esta logado
 function verificarLogado() {
-
     let status = JSON.parse(sessionStorage.getItem("status"));
     if (status == false || status == null) {
         window.location.replace("../index.html");
+        return;
     }
-
 }
 
-function verificarExpiracao(){
-    debugger
+function verificarExpiracao() {
+
     let hora = new Date().getHours();
     let minuto = new Date().getMinutes();
-    hora= hora*60;
+    hora = hora * 60;
     let horaAtual = hora + minuto;
     let horaLimite = JSON.parse(localStorage.getItem("horaLimite"));
     let status = JSON.parse(sessionStorage.getItem("status"));
-     if (horaAtual >= horaLimite) {
-            status = false;
-            sessionStorage.setItem('status', JSON.stringify(status));
-        }else{
-            status = true;
-            sessionStorage.setItem('status', JSON.stringify(status));
-        }
-       verificarLogado();
-    
-    
+    if (horaAtual >= horaLimite) {
+        status = false;
+        sessionStorage.setItem('status', JSON.stringify(status));
+    } else {
+        status = true;
+        sessionStorage.setItem('status', JSON.stringify(status));
     }
-
-
-
+    verificarLogado();
+}
 // carregar tela admin
 async function carregarTelaAdmin() {
     const liAdmin = document.querySelector(".li-admin");

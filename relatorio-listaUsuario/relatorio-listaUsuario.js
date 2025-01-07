@@ -5,31 +5,25 @@ const usuarioLogado = document.querySelector("#usuario-logado");
 const pesquisar = document.querySelector("#pesquisarId");
 const API_URL = "https://localhost:7222/api";
 
-
-
 // abrir menu
-function abrirMenu(){
+function abrirMenu() {
     let nav = document.querySelector(".nav");
-    let overflow= document.querySelector(  ".overflow");
+    let overflow = document.querySelector(".overflow");
     nav.style.display = "block";
     nav.style.left = "0";
     overflow.style.display = "block";
-
 }
 
 // fehar menu
-function fecharMenu(){
+function fecharMenu() {
     let nav = document.querySelector(".nav");
-    let overflow= document.querySelector(  ".overflow");
+    let overflow = document.querySelector(".overflow");
     nav.style.left = "-400px";
     overflow.style.display = "none";
 }
 
-
-
-
 // carrega ao iniciar a tela
-function onLoad(){
+function onLoad() {
     verificarLogado();
     verificarExpiracao();
     carregarTelaAdmin();
@@ -37,43 +31,33 @@ function onLoad(){
     carregarLista()
 }
 
-
-
-
 // carregar o usuario logado
-function carregarUsuarioLogado(){
+function carregarUsuarioLogado() {
     const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
     usuarioLogado.innerHTML = usuario;
 }
 
-
-
-
-
 // Função para sair da página e voltar a tela de login
-btnSair.addEventListener("click", function(){
-    window.location.replace ( "../index.html");
+btnSair.addEventListener("click", function () {
+    window.location.replace("../index.html");
 });
+
 // Função para imprimir a página atual
-btnImprimir.addEventListener("click", function(){
+btnImprimir.addEventListener("click", function () {
     window.print();
 });
 
-
-
 // adicionar Colaborador na lista
-
 function adicionarNaLista(colaborador) {
     const lista = document.querySelector("#listaCadastros");
     const item = document.createElement('li');
-    item.innerHTML = `<p><abbr title="${colaborador.nome}">${colaborador.nome}</abbr></p> <p><abbr title="${colaborador.email}">${colaborador.email}</abbr></p> <p class="pAtivo ${colaborador.ativo?"ativo":"inativo"}">${colaborador.ativo?"Ativo":"Inativo"}</p>`;
+    item.innerHTML = `<p><abbr title="${colaborador.nome}">${colaborador.nome}</abbr></p> <p><abbr title="${colaborador.email}">${colaborador.email}</abbr></p> <p class="pAtivo ${colaborador.ativo ? "ativo" : "inativo"}">${colaborador.ativo ? "Ativo" : "Inativo"}</p>`;
     lista.appendChild(item);
 }
 
-
 // carregar a lista de colaboradores
 async function carregarLista() {
-    const usuarioId= JSON.parse(localStorage.getItem("UsuarioId"));
+    const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
         if (!response.ok) {
@@ -81,7 +65,7 @@ async function carregarLista() {
         }
         const usuario = await response.json();
         const colaboradores = usuario.colaboradores;
-        
+
         const lista = document.querySelector("#listaCadastros");
         lista.innerHTML = "";
 
@@ -92,10 +76,9 @@ async function carregarLista() {
 }
 
 // pesquisar colaborador
-
 pesquisar.addEventListener("keyup", async () => {
     let valor = pesquisar.value.toLowerCase();
-    const usuarioId= JSON.parse(localStorage.getItem("UsuarioId"));
+    const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
 
@@ -114,10 +97,7 @@ pesquisar.addEventListener("keyup", async () => {
     }
 });
 
-
 //Admin - Cadastro de usuarios
-
-
 async function abrirTelaAdmin() {
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
     try {
@@ -135,6 +115,7 @@ async function abrirTelaAdmin() {
         console.error("Erro ao carregar lista:", error);
     }
 }
+
 // verifica se esta logado
 function verificarLogado() {
     let status = JSON.parse(sessionStorage.getItem("status"));
@@ -142,6 +123,7 @@ function verificarLogado() {
         window.location.replace("../index.html");
     }
 }
+
 // carregar tela admin
 async function carregarTelaAdmin() {
     const liAdmin = document.querySelector(".li-admin");
@@ -161,20 +143,22 @@ async function carregarTelaAdmin() {
         console.error("Erro ao carregar lista:", error);
     }
 }
-function verificarExpiracao(){
+
+function verificarExpiracao() {
     debugger
     let hora = new Date().getHours();
     let minuto = new Date().getMinutes();
-    hora= hora*60;
+    hora = hora * 60;
     let horaAtual = hora + minuto;
     let horaLimite = JSON.parse(localStorage.getItem("horaLimite"));
     let status = JSON.parse(sessionStorage.getItem("status"));
-     if (horaAtual >= horaLimite) {
-            status = false;
-            sessionStorage.setItem('status', JSON.stringify(status));
-        }else{
-            status = true;
-            sessionStorage.setItem('status', JSON.stringify(status));
-        }
-       verificarLogado();
+    if (horaAtual >= horaLimite) {
+        status = false;
+        sessionStorage.setItem('status', JSON.stringify(status));
+    } else {
+        status = true;
+        sessionStorage.setItem('status', JSON.stringify(status));
     }
+    verificarLogado();
+}
+

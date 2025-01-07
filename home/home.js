@@ -57,9 +57,7 @@ function adicionarNaLista(colaborador) {
     const lista = document.querySelector("#listaCadastros");
     const item = document.createElement('li');
     item.innerHTML = `<p><abbr title="${colaborador.nome}">${colaborador.nome}</abbr></p>  <p><abbr title="${colaborador.email}">${colaborador.email}</abbr></p> <p class="pAtivo ${colaborador.ativo ? "ativo" : "inativo"}">${colaborador.ativo ? "Ativo" : "Inativo"}</p>`;
-
     lista.appendChild(item);
-
 }
 
 // carregar a lista de colaboradores
@@ -74,18 +72,14 @@ async function carregarLista() {
 
         const usuario = await response.json();
         const colaboradores = usuario.colaboradores;
-
         const lista = document.querySelector("#listaCadastros");
         lista.innerHTML = "";
-
         colaboradores.reverse().forEach((colaborador) => adicionarNaLista(colaborador));
     } catch (error) {
         console.error("Erro ao carregar lista:", error);
     }
 }
-
 // pesquisar colaborador
-
 pesquisar.addEventListener("keyup", async () => {
     let valor = pesquisar.value.toLowerCase();
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
@@ -101,7 +95,6 @@ pesquisar.addEventListener("keyup", async () => {
         const colaboradores = Usuario.colaboradores;
         const lista = document.querySelector("#listaCadastros");
         lista.innerHTML = "";
-
         colaboradores
             .filter((item) => item.nome.toLowerCase().includes(valor) || item.email.toLowerCase().includes(valor))
             .forEach((item) => adicionarNaLista(item));
@@ -109,9 +102,7 @@ pesquisar.addEventListener("keyup", async () => {
         console.error("Erro na pesquisa:", error);
     }
 });
-
 // dashborde
-
 async function carregarDashborde() {
     let dashbordeTotal = document.querySelector("#dashboard-div1");
     let dashbordeAtivo = document.querySelector("#dashboard-div2");
@@ -135,22 +126,15 @@ async function carregarDashborde() {
 
     } catch (error) {
         console.error("Erro ao carregar lista:", error);
-
     }
 }
-
-
-
-
 //Admin - abrir tela admin
-
 async function abrirTelaAdmin() {
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
         if (!response.ok) {
             throw new Error("Erro ao carregar lista de Usuarios");
-
         }
         const usuarioAdmin = await response.json();
         if (usuarioAdmin.admin == true) {
@@ -182,32 +166,28 @@ async function carregarTelaAdmin() {
         console.error("Erro ao carregar lista:", error);
     }
 }
-
 // verificar se esta logado 
-
 function verificarLogado() {
     let status = JSON.parse(sessionStorage.getItem("status"));
     if (status == false || status == null) {
         window.location.replace("../index.html");
     }
 }
+function verificarExpiracao() {
 
-
-function verificarExpiracao(){
-
-let hora = new Date().getHours();
-let minuto = new Date().getMinutes();
-hora= hora*60;
-let horaAtual = hora + minuto;
-let horaLimite = JSON.parse(localStorage.getItem("horaLimite"));
-let status = JSON.parse(sessionStorage.getItem("status"));
- if (horaAtual >= horaLimite) {
+    let hora = new Date().getHours();
+    let minuto = new Date().getMinutes();
+    hora = hora * 60;
+    let horaAtual = hora + minuto;
+    let horaLimite = JSON.parse(localStorage.getItem("horaLimite"));
+    let status = JSON.parse(sessionStorage.getItem("status"));
+    if (horaAtual >= horaLimite) {
         status = false;
         sessionStorage.setItem('status', JSON.stringify(status));
-    }else{
+    } else {
         status = true;
         sessionStorage.setItem('status', JSON.stringify(status));
     }
-   verificarLogado();
+    verificarLogado();
 }
 

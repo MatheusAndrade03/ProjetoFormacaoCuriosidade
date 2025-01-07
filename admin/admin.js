@@ -20,14 +20,14 @@ const API_URL = "https://localhost:7222/api";
 btnSalvar.addEventListener("click", (event) => {
     cadastrarUsuario(event);
 })
+
 // abrir lista
 function abrirLista() {
     const telaLista = document.querySelector(".lista-wrapper");
-    const telaCadastro =document.querySelector("#cadastro-wrapper-cadastro");
+    const telaCadastro = document.querySelector("#cadastro-wrapper-cadastro");
     telaLista.style.display = "block";
     telaCadastro.style.display = "none";
 }
-
 
 // abrir menu
 function abrirMenu() {
@@ -36,7 +36,6 @@ function abrirMenu() {
     nav.style.display = "block";
     nav.style.left = "0";
     overflow.style.display = "block";
-
 }
 
 // fehar menu
@@ -56,14 +55,11 @@ function onLoad() {
     carregarLista();
 }
 
-
-
 // carregar o usuario logado
 function carregarUsuarioLogado() {
     const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
     usuarioLogado.innerHTML = usuario;
 }
-
 
 // sair do sistema
 btnSair.addEventListener("click", function () {
@@ -76,13 +72,12 @@ function abrirCadastro() {
     const telaCadastro = document.querySelector("#cadastro-wrapper-cadastro");
     telaLista.style.display = "none";
     telaCadastro.style.display = "block";
-
 }
 
 // cadastrar usuario
 async function cadastrarUsuario(event) {
     event.preventDefault();
-    debugger;
+    verificarExpiracao();
     let usuario = formUsuario.value;
     let senha = formSenha.value;
     let email = formEmail.value;
@@ -112,7 +107,7 @@ async function cadastrarUsuario(event) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(usuarios),
         });
-        if(response.status == 400){
+        if (response.status == 400) {
             alert("Email já cadastrado");
             return;
         }
@@ -120,14 +115,12 @@ async function cadastrarUsuario(event) {
             const error = await response.json();
             throw new Error(error.message || "Erro ao cadastrar usuario");
         }
-        
-         carregarLista();
-         abrirLista();
+        carregarLista();
+        abrirLista();
         formUsuario.value = "";
         formSenha.value = "";
         formEmail.value = "";
         radioAdmin.checked = false;
-
     } catch (error) {
         console.error("erro ao cadastrar", error);
     }
@@ -135,7 +128,6 @@ async function cadastrarUsuario(event) {
 }
 
 // adicionar Colaborador na lista
-
 function adicionarNaLista(usuario) {
     const lista = document.querySelector("#listaCadastros");
     const item = document.createElement('li');
@@ -173,7 +165,7 @@ async function carregarLista() {
 
 // pesquisar usuario
 pesquisar.addEventListener("keyup", async () => {
-   
+
     let valor = pesquisar.value.toLowerCase();
 
     const response = await fetch(`${API_URL}/Usuarios`);
@@ -193,11 +185,9 @@ pesquisar.addEventListener("keyup", async () => {
         });
 });
 
-
-
-
 // excluir usuario
 function excluirUsuario(usuario) {
+    verificarExpiracao();
     try {
         const response = fetch(`${API_URL}/Usuarios/${usuario.id}`,
             {
@@ -213,9 +203,6 @@ function excluirUsuario(usuario) {
         console.error("Erro ao excluir usuario", error);
     }
 }
-
-
-
 
 // função para abrir modal  para editar usuario
 function abrirModal(usuario) {
@@ -239,19 +226,19 @@ function abrirModal(usuario) {
 }
 
 async function editarUsuario(user) {
-  debugger;
+    verificarExpiracao();
     const usuario = formUsuarioEdit.value;
     const senha = formSenhaEdit.value;
     const email = formEmailEdit.value;
     const admin = radioAdminEdit.checked;
 
     const usuarioAtualizado = {
-            id: user.id,
-            nomeUsuario: usuario,
-            email,
-            senha,
-            admin
-        };
+        id: user.id,
+        nomeUsuario: usuario,
+        email,
+        senha,
+        admin
+    };
 
     try {
         const response = await fetch(`${API_URL}/Usuarios/${user.id}`, {
@@ -261,17 +248,14 @@ async function editarUsuario(user) {
             },
             body: JSON.stringify(usuarioAtualizado),
         });
-        if(response.status == 400){
+        if (response.status == 400) {
             alert("Email já cadastrado");
             return;
         }
         if (!response.ok) {
             throw new Error(`Erro ao atualizar usuário: ${response.status}`);
         }
-
         carregarLista();
-        
-        
     } catch (error) {
         console.error("Erro ao editar usuário:", error);
         alert("Erro ao editar usuário. Tente novamente mais tarde.");
@@ -279,26 +263,21 @@ async function editarUsuario(user) {
 }
 
 function verificarLogado() {
-
     let status = JSON.parse(sessionStorage.getItem("status"));
     if (status == false || status == null) {
         window.location.replace("../index.html");
+        return;
     }
 }
 
-
 async function VerificarAdmin() {
-
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
-
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
         if (!response.ok) {
             throw new Error("Erro ao carregar lista de Usuarios");
         }
-
         const usuarioAdmin = await response.json();
-
         if (usuarioAdmin.admin == false) {
             window.location.href = "../home/home.html";
         }
@@ -307,20 +286,19 @@ async function VerificarAdmin() {
     }
 }
 
-function verificarExpiracao(){
-    debugger
+function verificarExpiracao() {
     let hora = new Date().getHours();
     let minuto = new Date().getMinutes();
-    hora= hora*60;
+    hora = hora * 60;
     let horaAtual = hora + minuto;
     let horaLimite = JSON.parse(localStorage.getItem("horaLimite"));
     let status = JSON.parse(sessionStorage.getItem("status"));
-     if (horaAtual >= horaLimite) {
-            status = false;
-            sessionStorage.setItem('status', JSON.stringify(status));
-        }else{
-            status = true;
-            sessionStorage.setItem('status', JSON.stringify(status));
-        }
-       verificarLogado();
+    if (horaAtual >= horaLimite) {
+        status = false;
+        sessionStorage.setItem('status', JSON.stringify(status));
+    } else {
+        status = true;
+        sessionStorage.setItem('status', JSON.stringify(status));
     }
+    verificarLogado();
+}

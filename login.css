@@ -41,7 +41,7 @@ section#login {
 }
 
 div#imagem {
-    
+   background-image: url("imagens/forlogic-fundo.png");
     border-radius: 20px 20px 0px 0px;
     background-size: cover;
     background-repeat: no-repeat;

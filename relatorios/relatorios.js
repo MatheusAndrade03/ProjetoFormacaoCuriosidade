@@ -1,6 +1,7 @@
 
 const usuarioLogado = document.querySelector("#usuario-logado");
 const API_URL = "https://localhost:7222/api";
+
 // abrir menu
 function abrirMenu() {
     let nav = document.querySelector(".nav");
@@ -8,7 +9,6 @@ function abrirMenu() {
     nav.style.display = "block";
     nav.style.left = "0";
     overflow.style.display = "block";
-
 }
 
 // fehar menu
@@ -39,21 +39,16 @@ const btnSair = document.querySelector(".btn-sair");
 btnSair.addEventListener("click", function () {
     window.location.replace("../index.html");
 });
+
 //Admin - Cadastro de usuarios
 async function abrirTelaAdmin() {
-
-
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
-
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
         if (!response.ok) {
             throw new Error("Erro ao carregar lista de Usuarios");
-
         }
         const usuarioAdmin = await response.json();
-
-
 
         if (usuarioAdmin.admin == true) {
             window.location.href = "../admin/admin.html";
@@ -61,39 +56,32 @@ async function abrirTelaAdmin() {
             alert("Acesso negado!");
         }
 
-
     } catch {
-
         console.error("Erro ao carregar lista:", error);
-
-
     }
 
-
 }
+
 // verifica se esta logado
 function verificarLogado() {
     let status = JSON.parse(sessionStorage.getItem("status"));
     if (status == false || status == null) {
         window.location.replace("../index.html");
     }
-
 }
+
 // carregar tela admin
 async function carregarTelaAdmin() {
     const liAdmin = document.querySelector(".li-admin");
     const usuarioId = JSON.parse(localStorage.getItem("UsuarioId"));
-
     try {
         const response = await fetch(`${API_URL}/Usuarios/${usuarioId}`);
         if (!response.ok) {
             throw new Error("Erro ao carregar lista de Usuarios");
-
         }
         const usuarioAdmin = await response.json();
         if (usuarioAdmin.admin == true) {
             liAdmin.style.display = "flex";
-
         } else {
             liAdmin.style.display = "none";
         }
@@ -102,39 +90,39 @@ async function carregarTelaAdmin() {
         console.error("Erro ao carregar lista:", error);
     }
 }
-function verificarExpiracao(){
+
+function verificarExpiracao() {
     debugger
     let hora = new Date().getHours();
     let minuto = new Date().getMinutes();
-    hora= hora*60;
+    hora = hora * 60;
     let horaAtual = hora + minuto;
     let horaLimite = JSON.parse(localStorage.getItem("horaLimite"));
     let status = JSON.parse(sessionStorage.getItem("status"));
-     if (horaAtual >= horaLimite) {
-            status = false;
-            sessionStorage.setItem('status', JSON.stringify(status));
-        }else{
-            status = true;
-            sessionStorage.setItem('status', JSON.stringify(status));
-        }
-       verificarLogado();
-    
-    
+    if (horaAtual >= horaLimite) {
+        status = false;
+        sessionStorage.setItem('status', JSON.stringify(status));
+    } else {
+        status = true;
+        sessionStorage.setItem('status', JSON.stringify(status));
     }
-    function verificarExpiracao(){
-        debugger
-        let hora = new Date().getHours();
-        let minuto = new Date().getMinutes();
-        hora= hora*60;
-        let horaAtual = hora + minuto;
-        let horaLimite = JSON.parse(localStorage.getItem("horaLimite"));
-        let status = JSON.parse(sessionStorage.getItem("status"));
-         if (horaAtual >= horaLimite) {
-                status = false;
-                sessionStorage.setItem('status', JSON.stringify(status));
-            }else{
-                status = true;
-                sessionStorage.setItem('status', JSON.stringify(status));
-            }
-           verificarLogado();
-        }
+    verificarLogado();
+}
+
+function verificarExpiracao() {
+    debugger
+    let hora = new Date().getHours();
+    let minuto = new Date().getMinutes();
+    hora = hora * 60;
+    let horaAtual = hora + minuto;
+    let horaLimite = JSON.parse(localStorage.getItem("horaLimite"));
+    let status = JSON.parse(sessionStorage.getItem("status"));
+    if (horaAtual >= horaLimite) {
+        status = false;
+        sessionStorage.setItem('status', JSON.stringify(status));
+    } else {
+        status = true;
+        sessionStorage.setItem('status', JSON.stringify(status));
+    }
+    verificarLogado();
+}
