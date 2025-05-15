@@ -76,7 +76,7 @@ async function entrar() {
                 let status = true;
                 sessionStorage.setItem('status', JSON.stringify(status));
                 localStorage.setItem('horaLogin', JSON.stringify(horaAtual()));
-                localStorage.setItem('horaLimite', JSON.stringify(horaAtual() + 1));
+                localStorage.setItem('horaLimite', JSON.stringify(horaAtual() + 100));
                 window.location.href = 'home/home.html';
             } else {
                 alert('Email ou senha incorretos.');
