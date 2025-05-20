@@ -4,7 +4,7 @@ Este projeto foi desenvolvido como parte da disciplina **Oficina de Integração
 
 ## objetivo
 
-O sistema permite o gerenciamento de colaboradores por usuários cadastrados. Cada usuário possui seus próprios colaboradores. Usuários com perfil de administrador podem também gerenciar outros usuários. O sistema faz parte de um contexto fictício do projeto de extensão **ELLP - Ensino Lúdico de Lógica e Programação**.
+O sistema permite o gerenciamento de colaboradores por usuários cadastrados. Cada usuário possui seus próprios colaboradores. Usuários com perfil de administrador podem também gerenciar outros usuários. O sistema faz parte de um contexto fictício do projeto de extensão .
 
 ---
 
