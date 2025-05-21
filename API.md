@@ -4,7 +4,7 @@ Este guia mostra como utilizar o Postman para testar os endpoints da API do sist
 
 Base da API: http://localhost:5000/api
 
-## 🔐 Autenticação
+# 🔐 Autenticação
 
 ## Login
 
@@ -24,7 +24,7 @@ Resposta:
 }
 
 
-## 👥 Colaboradores
+# 👥 Colaboradores
 
 ## 📃 Listar todos
 
@@ -90,7 +90,7 @@ Body (JSON):
   "ehAdmin": true
 }
 
-## 👥 Atualizar usuário
+# 👥 Atualizar usuário
 
 PUT /usuarios/{id}
 
