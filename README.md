@@ -57,7 +57,6 @@ A aplicação está dividida nas seguintes camadas:
 - **Banco de dados**: MySQL, mapeado via Entity Framework
 - **Segurança**: JWT para autenticação e controle de acesso por roles
 
-> Veja o diagrama de arquitetura no arquivo `docs/diagrama-arquitetura.png` (ou outro local, se desejar).
 
 ---
 
