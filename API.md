@@ -10,11 +10,13 @@ Base da API: http://localhost:5000/api
 
 POST /authentication/login
 
+referente ao usuario criado
+
 Body (JSON):
 
 {
   "email": "admin@email.com",
-  "senha": "sua_senha"
+  "senha": "admin"
 }
 
 Resposta:
