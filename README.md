@@ -115,7 +115,7 @@ Caso não tenha o EF use o comando de install
 
 dotnet tool install --global dotnet-ef
 
-Caso tenha autialize
+Caso tenha atualize
 
 dotnet tool update --global dotnet-ef
 
