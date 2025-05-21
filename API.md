@@ -6,7 +6,7 @@ Base da API: http://localhost:5000/api
 
 # 🔐 Autenticação
 
-## Login
+### Login
 
 POST /authentication/login
 
@@ -26,15 +26,15 @@ Resposta:
 
 # 👥 Colaboradores
 
-## 📃 Listar todos
+### 📃 Listar todos
 
 GET /colaboradores
 
-## 📰 Buscar por ID
+### 📰 Buscar por ID
 
 GET /colaboradores/{id}
 
-## 👨‍👦 Criar colaborador
+### 👨‍👦 Criar colaborador
 
 POST /colaboradores
 
@@ -46,7 +46,7 @@ Body (JSON):
   "usuarioId": 1
 }
 
-## 👩‍👩‍👧 Atualizar colaborador
+### 👩‍👩‍👧 Atualizar colaborador
 
 PUT /colaboradores/{id}
 
@@ -59,25 +59,25 @@ Body (JSON):
   "usuarioId": 1
 }
 
-## ❌ Deletar colaborador
+### ❌ Deletar colaborador
 
 DELETE /colaboradores/{id}
 
-## 👤 Usuários (somente Admin)
+# 👤 Usuários (somente Admin)
 
-## 📃 Listar todos
+### 📃 Listar todos
 
 GET /usuarios
 
-## 📰 Buscar por ID
+### 📰 Buscar por ID
 
 GET /usuarios/{id}
 
-##  📨 Buscar por e-mail
+###  📨 Buscar por e-mail
 
 GET /usuarios/{email}
 
-## 👤 Criar usuário
+### 👤 Criar usuário
 
 POST /usuarios
 
@@ -90,7 +90,7 @@ Body (JSON):
   "ehAdmin": true
 }
 
-# 👥 Atualizar usuário
+### 👥 Atualizar usuário
 
 PUT /usuarios/{id}
 
@@ -104,7 +104,7 @@ Body (JSON):
   "ehAdmin": true
 }
 
-## ❌ Deletar usuário
+### ❌ Deletar usuário
 
 DELETE /usuarios/{id}
 
