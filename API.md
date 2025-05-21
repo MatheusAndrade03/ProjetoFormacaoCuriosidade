@@ -41,9 +41,16 @@ POST /colaboradores
 Body (JSON):
 
 {
-  "nome": "Maria Silva",
-  "cargo": "Desenvolvedora",
-  "usuarioId": 1
+  "ativo": true,
+  "email": "lucas@example.com",
+  "endereco": "Rua 29 de agosto",
+  "idade": "13",
+  "interesses": "Jogar",
+  "nome": "Lucas",
+  "outrasInfo": "Estudante",
+  "sentimentos": "Confiante",
+  "valores": "Fiel",
+  "usuarioId": 4
 }
 
 ### 👩‍👩‍👧 Atualizar colaborador
@@ -53,10 +60,16 @@ PUT /colaboradores/{id}
 Body (JSON):
 
 {
-  "id": 1,
-  "nome": "Maria Silva Atualizada",
-  "cargo": "Dev Pleno",
-  "usuarioId": 1
+  "ativo": true,
+  "email": "lucas123@example.com",
+  "endereco": "Rua kanematsu matsu",
+  "idade": "14",
+  "interesses": "Jogar bola",
+  "nome": "Lucas roberto",
+  "outrasInfo": "Estudante",
+  "sentimentos": "Confiante",
+  "valores": "Fiel",
+  "usuarioId": 4
 }
 
 ### ❌ Deletar colaborador
@@ -84,10 +97,12 @@ POST /usuarios
 Body (JSON):
 
 {
-  "nome": "João Admin",
-  "email": "joao@email.com",
+  "id": 4,
+  "nomeUsuario": "Joao",
   "senha": "123456",
-  "ehAdmin": true
+  "email": "joao@example.com",
+  "admin": true
+  
 }
 
 ### 👥 Atualizar usuário
@@ -97,11 +112,12 @@ PUT /usuarios/{id}
 Body (JSON):
 
 {
-  "id": 1,
-  "nome": "João Admin Editado",
-  "email": "joao@email.com",
-  "senha": "nova_senha",
-  "ehAdmin": true
+  "id": 4,
+  "nomeUsuario": "Joao",
+  "senha": "987654321",
+  "email": "joaop@example.com",
+  "admin": true
+  
 }
 
 ### ❌ Deletar usuário
