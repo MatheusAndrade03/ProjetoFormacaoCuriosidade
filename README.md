@@ -96,7 +96,9 @@ A aplicação está dividida nas seguintes camadas:
 
 3. Abra o backend (OperacaoCuriosidadeApiI) no Visual Studio 
 
+
 4. Configure o appsettings.json com a string de conexão ao banco MySQL. 
+
 
 "ConnectionStrings": {
     "DefaultConnection": "Server=localhost;Database=OperacaoCuriosidadeBD;Uid=(seu id do acesso ao workebench);Pwd=(sua senha)"
@@ -111,12 +113,15 @@ EX:C:\Users\User\Desktop\Estudos\OperacaoCuriosidadeApi\OperaçãoCuriosidadeApi
  depois rode os comandos abaixo
 
 Caso não tenha o EF use o comando de install
+
 dotnet tool install --global dotnet-ef
 
 Caso tenha autialize
+
 dotnet tool update --global dotnet-ef
 
  depois execute as migrações com este comando:
+
 dotnet ef database update
 
 6. Inicie o backend
@@ -128,6 +133,7 @@ dotnet run
 8. Rode o (index.html) diretamente no navegador ou hospede com um servidor local.
 
 9. Utilize o login do admin
+
 email: admin@gmail.com
 senha: admin
 
